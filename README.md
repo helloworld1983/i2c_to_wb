@@ -1,1 +1,1 @@
-# SDRAM Controller
+# I2C to Wishbone Adapter
