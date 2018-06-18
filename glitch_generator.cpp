@@ -9,27 +9,34 @@
 void glitch_generator::glitchLoop()
 {
     int waitTime = 0;
+    sc_logic hiZ;
+    hiZ = 'z';
+    cout << "First Loop" << endl;
     while(true)
-    {
-        
+    {        
+        cout << "Inside" << endl;
         waitTime = (rand() % MAX_FREQ);
-        wait(waitTime);
+        wait(waitTime,SC_NS);
+
+        cout << "Time" << waitTime << endl;
 
         glitch_en = true;
-        change = ~change;
-        
-        waitTime = (rand() % MAX_WIDTH);
-        wait(waitTime);
-        
-        
-        glitch = ~glitch;
-        change = ~change;
+      
+        out.write(glitch);
 
         waitTime = (rand() % MAX_WIDTH);
-        wait(waitTime);
-
+        wait(waitTime,SC_NS);
+        
+        
+        glitch = '1';
+    
+        out.write(glitch);
+  
+        waitTime = (rand() % MAX_WIDTH);
+        wait(waitTime,SC_NS);
         glitch_en = false;
-        change = ~change;
+        
+        out.write(hiZ);      
 
     }
 
@@ -37,20 +44,21 @@ void glitch_generator::glitchLoop()
 
 void glitch_generator::setGlitch()
 {    
-    sc_logic hiZ;
-    hiZ = 'z';
-    while(true)
-    {
-        
-        if(glitch_en)
-        {
-            out.write(glitch);
-        }
-        else
-        {
-            out.write(hiZ);
-        }
+    // int test = 1000000;
+    // sc_logic hiZ;
 
-    }
+    // hiZ = 'z';
+    // while(test>0)
+    // {        
+        // if(glitch_en)
+        // {
+        //     out.write(glitch);
+        // }
+        // else
+        // {
+        //     out.write(hiZ);
+        // }
+    //     test--;
+    // }
 
 }
