@@ -19,22 +19,13 @@ SC_MODULE(glitch_generator)
     sc_out<sc_logic> in;
     sc_out<sc_logic> out;
 
-   // sc_bit glitch_generator_en;
-    sc_logic glitch;
-    bool glitch_en;
-    sc_signal<bool> change;
-
-    void glitchLoop();   
-    void setGlitch(); 
+    void glitchLoop(); 
 
      SC_HAS_PROCESS(glitch_generator);
     // constructor
     glitch_generator(sc_module_name name_):
     sc_module(name_)
     {
-        glitch = '0';
-        cout << "Constructor" << endl;
-
         SC_THREAD(glitchLoop);
         sensitive << in;
     }
