@@ -16,13 +16,20 @@ void glitch_generator::glitchLoop()
         wait(waitTime);
 
         glitch_en = true;
+        change = ~change;
+        
+        waitTime = (rand() % MAX_WIDTH);
+        wait(waitTime);
+        
+        
+        glitch = ~glitch;
+        change = ~change;
+
         waitTime = (rand() % MAX_WIDTH);
         wait(waitTime);
 
-        glitch = ~glitch;
-        waitTime = (rand() % MAX_WIDTH);
-        wait(waitTime);
         glitch_en = false;
+        change = ~change;
 
     }
 
