@@ -3,4 +3,4 @@ rm i2c_to_wb.vcd
 clear
 iverilog -I ./src ./src/*.v ./sim/tests/debug/*.v ./sim/models/*.v ./sim/src/*.v
 vvp a.out
-gtkwave ./*.vcd
+gtkwave -a gtkwaveConfig.gtkw ./*.vcd
