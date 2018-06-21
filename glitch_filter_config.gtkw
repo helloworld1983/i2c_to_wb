@@ -1,0 +1,45 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Jun 19 04:20:52 2018
+[*]
+[dumpfile] "/mnt/hgfs/LaptopPublic/Maestria/MP6160_HighLevelDesign/Code/TopModule_Esteban/glitch_filter.vcd"
+[dumpfile_mtime] "Tue Jun 19 04:19:43 2018"
+[dumpfile_size] 2797
+[savefile] "/mnt/hgfs/LaptopPublic/Maestria/MP6160_HighLevelDesign/Code/TopModule_Esteban/glitch_filter_config.gtkw"
+[timestart] 0
+[size] 958 1003
+[pos] -1 -1
+*-6.069162 23 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] SystemC.
+[sst_width] 225
+[signals_width] 262
+[sst_expanded] 1
+[sst_vpaned_height] 294
+@28
+SystemC.tb_clk
+SystemC.tb_out
+[color] 1
+SystemC.tb_in
+[color] 3
+SystemC.tb_rise
+[color] 3
+SystemC.tb_fall
+@200
+-
+-Glitch Internal
+@28
+SystemC.glitchFilter.all_hi_lsb
+SystemC.glitchFilter.all_low_lsb
+@800028
+SystemC.glitchFilter.buffer[2:0]
+@28
+(0)SystemC.glitchFilter.buffer[2:0]
+(1)SystemC.glitchFilter.buffer[2:0]
+(2)SystemC.glitchFilter.buffer[2:0]
+@1001200
+-group_end
+@28
+SystemC.glitchFilter.in_reg
+SystemC.glitchFilter.out_en
+[pattern_trace] 1
+[pattern_trace] 0
