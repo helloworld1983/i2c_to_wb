@@ -7,10 +7,17 @@ LDLIBS=$(LDLIBS_$(ARCH))
 CXXFLAGS=-Wno-deprecated -I$(SYSCDIR)/include
 CXX=g++
 
-OUT_FILES=glitch_filter.o glitch_filter.vcd
+OUT_FILES=i2c_to_wb.o model model.vcd glitch_generator.o litch_filter.o glitch_filter.vcd
 
-all: glitch_filter.o
-	$(CXX) $(CXXFLAGS) main.cpp glitch_filter.o $(LDLIBS) -o i2c_to_wb.o
+all: glitch_generator.o glitch_filter.o
+	$(CXX) $(CXXFLAGS) main.cpp glitch_generator.o $(LDLIBS) -o i2c_to_wb.o
+
+modelrun: model
+	./model
+model: glitch_generator.o
+	$(CXX) $(CXXFLAGS) Model/tb_model.cpp -o model glitch_generator.o $(LDLIBS)
+glitch_generator.o: Model/glitch_generator.cpp Model/glitch_generator.h
+	$(CXX) $(CXXFLAGS) -c Model/glitch_generator.cpp Model/glitch_generator.h $(LDLIBS)
 
 glitch_filter.o: glitch_filter.cpp
 	$(CXX) $(CXXFLAGS) -c glitch_filter.cpp $(LDLIBS)
