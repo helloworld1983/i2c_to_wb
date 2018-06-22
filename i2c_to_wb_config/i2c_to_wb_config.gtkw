@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.79 (w)1999-2017 BSI
+[*] Fri Jun 22 06:34:09 2018
+[*]
+[dumpfile] "/home/mcastro/workspace/Proyecto1/i2c_to_wb/SystemC/i2c_to_wb_config.vcd"
+[dumpfile_mtime] "Fri Jun 22 06:28:28 2018"
+[dumpfile_size] 7849
+[savefile] "/home/mcastro/workspace/Proyecto1/i2c_to_wb/SystemC/i2c_to_wb_config.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 49 76
+*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 229
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 139
+@28
+SystemC.i2c_ack_out
+@22
+SystemC.i2c_byte_in[7:0]
+@28
+SystemC.tip_addr_ack
+SystemC.wb_clk_i
+SystemC.wb_rst_i
+[pattern_trace] 1
+[pattern_trace] 0
