@@ -85,134 +85,134 @@ void i2c_to_wb_fsm::fsm()
         }
         case fsm_state::addr_byte:
         {
-            if( xmt_byte_done )
+            if( xmt_byte_done.read() )
             {
-                next_state = fsm_state::addr_ack;
+               next_state.write(fsm_state::addr_ack);
             }
-            else if (stop_detected)
+            else if (stop_detected.read())
             {
-                next_state = fsm_state::error;
+               next_state.write(fsm_state::error);
             }
             else
             {
-                next_state = fsm_state::addr_byte;
+               next_state.write(fsm_state::addr_byte);
             }
             break;
         }
         case fsm_state::addr_ack:
         {
-            if( i2c_ack_out )
+            if( i2c_ack_out.read() )
             {
-                next_state = fsm_state::idle;
+               next_state.write(fsm_state::idle);
             }
-            else if(i2c_ack_done)
+            else if(i2c_ack_done.read())
             {
-                if (i2c_r_w_bit)
+                if (i2c_r_w_bit.read())
                 {
-                    next_state = fsm_state::read;
+                   next_state.write(fsm_state::read);
                 }
                 else
                 {
-                    next_state = fsm_state::write;
+                   next_state.write(fsm_state::write);
                 }
             }
-            else if (start_detected || stop_detected)
+            else if (start_detected.read() || stop_detected.read())
             {
-                next_state = fsm_state::error;
+               next_state.write(fsm_state::error);
             }
             else
             {
-                next_state = fsm_state::addr_ack;
+               next_state.write(fsm_state::addr_ack);
             }
             break;
         }
         case fsm_state::write:
         {
-            if( xmt_byte_done )
+            if( xmt_byte_done.read() )
             {
-                next_state = fsm_state::wr_ack;
+               next_state.write(fsm_state::wr_ack);
             }
             else if(start_detected)
             {
-                next_state = fsm_state::addr_byte;
+               next_state.write(fsm_state::addr_byte);
             }
-            else if (stop_detected)
+            else if (stop_detected.read())
             {
-                next_state = fsm_state::idle;
+               next_state.write(fsm_state::idle);
             }
             else
             {
-                next_state = fsm_state::write;
+               next_state.write(fsm_state::write);
             }
             break;
         }
         case fsm_state::wr_ack:
         {
-            if( i2c_ack_done )
+            if( i2c_ack_done.read() )
             {
-                next_state = fsm_state::write;
+               next_state.write(fsm_state::write);
             }
-            else if( start_detected || stop_detected )
+            else if( start_detected.read() || stop_detected.read() )
             {
-                next_state = fsm_state::error;
+               next_state.write(fsm_state::error);
             }
             else
             {
-                next_state = fsm_state::wr_ack;
+               next_state.write(fsm_state::wr_ack);
             }
             break;
         }
         case fsm_state::read:
         {
-            if( xmt_byte_done )
+            if( xmt_byte_done.read() )
             {
-                next_state = fsm_state::rd_ack;
+               next_state.write(fsm_state::rd_ack);
             }
-            else if(start_detected)
+            else if(start_detected.read())
             {
-                next_state = fsm_state::addr_byte;
+               next_state.write(fsm_state::addr_byte);
             }
-            else if(stop_detected)
+            else if(stop_detected.read())
             {
-                next_state = fsm_state::idle;
+               next_state.write(fsm_state::idle);
             }
             else
             {
-                next_state = fsm_state::read;
+               next_state.write(fsm_state::read);
             }
             break;
         }
         case fsm_state::rd_ack:
         {
-            if( i2c_ack_done )
+            if( i2c_ack_done.read() )
             {
-                if (i2c_data)
+                if (i2c_data.read())
                 {
-                    next_state = fsm_state::idle;
+                   next_state.write(fsm_state::idle);
                 }
                 else
                 {
-                    next_state = fsm_state::read;
+                   next_state.write(fsm_state::read);
                 } 
             }
-            else if (start_detected || stop_detected)
+            else if (start_detected.read() || stop_detected.read())
             {
-                next_state = fsm_state::error;
+               next_state.write(fsm_state::error);
             }
             else
             {
-                next_state = fsm_state::rd_ack;
+               next_state.write(fsm_state::rd_ack);
             }
             break;
         }
         case fsm_state::error:
         {
-            next_state = fsm_state::idle;
+           next_state.write(fsm_state::idle);
             break;
         }
         default:
         {
-            next_state = fsm_state::error;
+           next_state.write(fsm_state::error);
             break;            
         }                                                         
     }
