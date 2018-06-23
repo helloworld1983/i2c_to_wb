@@ -11,32 +11,76 @@ void wb_slave_model::ackDelayed()
 
 }
 
+void wb_slave_model::setOutData()
+{    
+    uint memAddress;
+    sc_uint<DWIDTH> data_out;
+    sc_uint<DWIDTH> address_in;
+
+    memAddress = (address_in.range(AWIDTH-1,2)<<2);
+
+    // data_out.range(7,0) =  ram[memAddress];
+    // data_out.range(15,8) =  ram[memAddress & 1];
+    // data_out.range(23,16) =  ram[memAddress & 2];
+    // data_out.range(31,24) =  ram[memAddress & 3];
+
+    data_out=(ram[memAddress & 3],ram[memAddress & 2],ram[memAddress & 1],ram[memAddress]);
+    dat_o.write(data_out) ; 
+
+    cout<<"Out - Address : "<<address_in<<endl;
+    cout<<"Out - Memory Address : "<<memAddress<<endl;
+    cout<<"Out - Data: "<<data_out<<endl;         
+}
+
 
 void wb_slave_model::dataGen()
 {
-    uint memAddress = 0;
-
-    if (we_i & cyc_i & stb_i & sel_i[0]) 
+    uint memAddress;
+    sc_uint<DWIDTH/8> sel_in;
+    sc_uint<DWIDTH> data_in;
+    sc_uint<DWIDTH> address_in;
+    cout<<"Data Gen"<<endl;
+    
+    while(true)
     {
-        memAddress = static_cast< sc_uint >( data_in->read().range(AWIDTH-1,2) );
-        cout<<"test"<<memAddress<<endl;
-        //ram[{adr_i[AWIDTH-1:2], 2'b00'}] <= dat_i[7:0];
-    }
-        
-        
+        sel_in = sel_i.read();
+        data_in = dat_i.read();
+        address_in = adr_i.read();
 
-    // if (we_i & cyc_i & stb_i & sel_i[1]) 
-    //     ram[{adr_i[AWIDTH-1:2], 2'b01'}] <= dat_i[15:8];
-        
-    // always @ (posedge clk_i)
-    // if (we_i & cyc_i & stb_i & sel_i[2]) 
-    //     ram[{adr_i[AWIDTH-1:2], 2'b10'}] <= dat_i[23:16];
-        
-    // always @ (posedge clk_i)
-    // if (we_i & cyc_i & stb_i & sel_i[3]) 
-    //     ram[{adr_i[AWIDTH-1:2], 2'b11'}] <= dat_i[31:24];
-        
-    // assign dat_o = { ram[{adr_i[AWIDTH-1:2], 2'b11'}], ram[{adr_i[AWIDTH-1:2], 2'b10'}], ram[{adr_i[AWIDTH-1:2], 2'b01'}], ram[{adr_i[AWIDTH-1:2], 2'b00'}] };
+        if (we_i && cyc_i && stb_i && (sel_in[0]==1))
+        {
+            //ram[{adr_i[AWIDTH-1:2], 2'b00'}] <= dat_i[7:0];
+            memAddress =  (address_in.range(AWIDTH-1,2)<<2)&0 ;
+            ram[memAddress] = data_in.range(7,0);                              
+        }
+
+        if (we_i && cyc_i && stb_i && (sel_in[1]==1))
+        {
+            //ram[{adr_i[AWIDTH-1:2], 2'b00'}] <= dat_i[7:0];
+            memAddress =  (address_in.range(AWIDTH-1,2)<<2)&1 ;
+            ram[memAddress] = data_in.range(15,8);                              
+        }
+
+        if (we_i && cyc_i && stb_i && (sel_in[2]==1))
+        {
+            //ram[{adr_i[AWIDTH-1:2], 2'b00'}] <= dat_i[7:0];
+            memAddress =  (address_in.range(AWIDTH-1,2)<<2)&2 ;
+            ram[memAddress] = data_in.range(23,16);                              
+        }
+
+        if (we_i && cyc_i && stb_i && (sel_in[3]==1))
+        {
+            //ram[{adr_i[AWIDTH-1:2], 2'b00'}] <= dat_i[7:0];
+            memAddress =  (address_in.range(AWIDTH-1,2)<<2)&3 ;
+            ram[memAddress] = data_in.range(31,24);                              
+        }
+
+        cout<<"Data In: "<<data_in<<endl;
+        cout<<"Memory Address : "<<memAddress<<endl;
+        cout<<"Memory Data: "<<ram[memAddress]<<endl;
+
+        wait();
+    }
 }
 
 void wb_slave_model::readMemory()

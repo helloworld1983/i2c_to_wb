@@ -29,7 +29,7 @@ SC_MODULE(wb_slave_model)
     sc_in<bool>                 cyc_i;
     sc_in<bool>                 stb_i;
     sc_in<bool>                 we_i;
-    sc_in<sc_uint<(DWIDTH)/8> > sel_i;
+    sc_in<sc_uint<DWIDTH/8> > sel_i;
     sc_out<bool>                ack_o;
     sc_out<bool>                err_o;
     sc_out<bool>                rty_o;
@@ -39,18 +39,22 @@ SC_MODULE(wb_slave_model)
     void ackDelayed();
     void dataGen();
     void readMemory(); 
+    void setOutData();
 
     SC_CTOR(wb_slave_model)
     {
         readMemory();
 
         SC_METHOD(ackDelayed);
-        sensitive << clk_i.pos();
-        sensitive << stb_i;
-        sensitive << cyc_i;
+            sensitive << clk_i.pos();
+            sensitive << stb_i;
+            sensitive << cyc_i;
 
-        SC_METHOD(dataGen);
-        sensitive << clk_i.pos();
+        SC_THREAD(dataGen);
+            sensitive << clk_i.pos();
+
+        SC_METHOD(setOutData);
+            sensitive << clk_i;
 
     }
 

@@ -64,8 +64,8 @@ int sc_main (int, char *[])
         cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
         wValue = '1';
         glitch_in.write(wValue);
-        //sc_start(100,SC_NS);
-        //cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
+        sc_start(100,SC_NS);
+        cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
     }
     cout << "@" << sc_time_stamp()<< endl;
     
