@@ -14,10 +14,13 @@ all: glitch_generator.o glitch_filter.o
 
 modelrun: model
 	./model
-model: glitch_generator.o
-	$(CXX) $(CXXFLAGS) Model/tb_model.cpp -o model glitch_generator.o $(LDLIBS)
+model: glitch_generator.o wb_slave_model.o
+	$(CXX) $(CXXFLAGS) Model/tb_model.cpp -o model glitch_generator.o wb_slave_model.o $(LDLIBS)
 glitch_generator.o: Model/glitch_generator.cpp Model/glitch_generator.h
 	$(CXX) $(CXXFLAGS) -c Model/glitch_generator.cpp Model/glitch_generator.h $(LDLIBS)
+wb_slave_model.o: Model/wb_slave_model.cpp Model/wb_slave_model.h
+	$(CXX) $(CXXFLAGS) -c Model/wb_slave_model.cpp Model/wb_slave_model.h $(LDLIBS)
+
 
 glitch_filter.o: glitch_filter.cpp
 	$(CXX) $(CXXFLAGS) -c glitch_filter.cpp $(LDLIBS)

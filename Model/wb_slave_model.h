@@ -8,11 +8,15 @@
 
 #include <systemc.h>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream> // To use ifstream
+#include <vector>
 
 #define DWIDTH 32
 #define AWIDTH 8
 #define ACK_DELAY 2
-#define SLAVE_RAM_INIT "wb_slave_32_bit.txt"
+#define SLAVE_RAM_INIT "Model/wb_slave_32_bit.txt"
+
 
 SC_MODULE(wb_slave_model)
 {
@@ -28,8 +32,9 @@ SC_MODULE(wb_slave_model)
     sc_in<sc_uint<(DWIDTH)/8> > sel_i;
     sc_out<bool>                ack_o;
     sc_out<bool>                err_o;
-    sc_out<bool>                rty_o
-   
+    sc_out<bool>                rty_o;
+
+    std::vector<uint> ram;   
 
     void ackDelayed();
     void dataGen();
