@@ -37,7 +37,12 @@ SC_MODULE (i2c_to_wb_top)
     
     // SystemC
     sc_uint<9> i2c_data_in_r;
-    sc_signal<bool> serial_out = i2c_data_in_r[8];
+
+    bool t_i2c_r_w_bit = static_cast<bool>(i2c_data_in_r[0]);
+    bool t_serial_out = static_cast<bool>(i2c_data_in_r[8]);
+
+    sc_signal<bool> serial_out;
+    sc_signal<bool> i2c_r_w_bit;
     
 
     ////////////////// FALTA LOGICA
@@ -90,6 +95,8 @@ SC_MODULE (i2c_to_wb_top)
                              i_i2c_to_wb_if("i_i2c_to_wb_if")
 
     {
+        i2c_r_w_bit.write(t_i2c_r_w_bit);
+        serial_out.write(t_serial_out);
         // -------------------------------------> Glitch Filter 
         // Connect Inputs
         i_gf_i2c_data_in.clk (wb_clk_i);
@@ -127,7 +134,7 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_fsm.i2c_ack_done(i2c_ack_done);
         i_i2c_to_wb_fsm.i2c_ack_out(i2c_ack_out);
         i_i2c_to_wb_fsm.i2c_data(gf_i2c_data_in);
-        i_i2c_to_wb_fsm.i2c_r_w_bit(i2c_data_in_r[0]);              // problema sc_bool
+        i_i2c_to_wb_fsm.i2c_r_w_bit(i2c_r_w_bit);              // problema sc_bool
         i_i2c_to_wb_fsm.tip_addr_byte(tip_addr_byte);
         i_i2c_to_wb_fsm.tip_addr_ack(tip_addr_ack);
         i_i2c_to_wb_fsm.tip_read_byte(tip_read_byte);
