@@ -38,6 +38,15 @@ test_fsm:i2c_to_wb_fsm/tb_i2c_to_wb_fsm.cpp i2c_to_wb_fsm.o
 i2c_to_wb_fsm.o: i2c_to_wb_fsm/i2c_to_wb_fsm.cpp
 	$(CXX) $(CXXFLAGS) -c i2c_to_wb_fsm/i2c_to_wb_fsm.cpp $(LDLIBS)
 
+test_if:i2c_to_wb_if/tb_i2c_to_wb_if.cpp i2c_to_wb_if.o
+	$(CXX) $(CXXFLAGS) i2c_to_wb_if/tb_i2c_to_wb_if.cpp -o if.out i2c_to_wb_if.o $(LDLIBS)
+i2c_to_wb_if.o: i2c_to_wb_if/i2c_to_wb_if.cpp i2c_to_wb_if/i2c_to_wb_if.h
+	$(CXX) $(CXXFLAGS) -c i2c_to_wb_if/i2c_to_wb_if.cpp i2c_to_wb_if/i2c_to_wb_if.h $(LDLIBS)
+
+test_config:i2c_to_wb_config/tb_i2c_to_wb_config.cpp i2c_to_wb_config.o
+	$(CXX) $(CXXFLAGS) i2c_to_wb_config/tb_i2c_to_wb_config.cpp -o config.out i2c_to_wb_config.o $(LDLIBS)
+i2c_to_wb_config.o: i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_to_wb_config.h
+	$(CXX) $(CXXFLAGS) -c i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_to_wb_config.h $(LDLIBS)
 
 clean:
 	rm -f $(OUT_FILES)
