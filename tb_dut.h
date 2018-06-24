@@ -24,28 +24,8 @@ SC_MODULE(tb_dut)
     sc_in<bool>                 tb_clk;
     sc_in<bool>                 tb_rst;
     
-
-    std::vector<uint> ram;   
-
-    void ackDelayed();
-    void dataGen();
-    void readMemory(); 
-    void setOutData();
-
     SC_CTOR(tb_dut)
     {
-        readMemory();
-
-        SC_THREAD(ackDelayed);
-            sensitive << clk_i;
-            sensitive << stb_i;
-            sensitive << cyc_i;
-
-        SC_THREAD(dataGen);
-            sensitive << clk_i.pos();
-
-        SC_METHOD(setOutData);
-            sensitive << clk_i;
 
     }
 
