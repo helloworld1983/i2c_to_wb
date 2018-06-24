@@ -7,15 +7,8 @@
 #define _TB_DUT_H
 
 #include <systemc.h>
-#include <stdlib.h>
-#include <iostream>
-#include <fstream> // To use ifstream
-#include <vector>
 
-#define DWIDTH 32
-#define AWIDTH 8
-#define ACK_DELAY 2
-#define SLAVE_RAM_INIT "Model/wb_slave_32_bit.txt"
+
 
 
 SC_MODULE(tb_dut)
