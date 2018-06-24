@@ -58,25 +58,24 @@ int sc_main (int, char *[])
 
     cout << "@" << sc_time_stamp()<< endl;
     
-    sc_start(500,SC_NS);  
+    sc_start(100,SC_NS);  
 
     sel_i.write(1);      
+    sc_start(100,SC_NS);    
+    cyc_i.write(1); 
+    sc_start(100,SC_NS);   
+    we_i.write(1); 
     sc_start(100,SC_NS);  
-    sel_i.write(3);  
-    cyc_i.write('1'); 
-    sc_start(100,SC_NS);  
-    sel_i.write(7);  
-    we_i.write('1'); 
-    sc_start(100,SC_NS);  
-    sel_i.write(15);  
-    stb_i.write('1'); 
-    sc_start(100,SC_NS);
+    stb_i.write(1); 
     sc_start(100,SC_NS);  
     sel_i.write(2);  
-    we_i.write('0'); 
-    stb_i.write('0'); 
-    cyc_i.write('0'); 
-    sc_start(100,SC_NS);
+    sc_start(500,SC_NS);       
+    we_i.write(0); 
+    sc_start(100,SC_NS);  
+    stb_i.write(0); 
+    sc_start(600,SC_NS);
+    cyc_i.write(0); 
+    sc_start(500,SC_NS); 
 
 
     cout << "@" << sc_time_stamp()<< endl;

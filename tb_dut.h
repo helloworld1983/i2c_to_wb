@@ -3,8 +3,8 @@
     // Autor: Diego Herrera
     // ITCR 2018
 
-#ifndef _WB_SLAVE_MODEL_H
-#define _WB_SLAVE_MODEL_H
+#ifndef _TB_DUT_H
+#define _TB_DUT_H
 
 #include <systemc.h>
 #include <stdlib.h>
@@ -18,21 +18,12 @@
 #define SLAVE_RAM_INIT "Model/wb_slave_32_bit.txt"
 
 
-SC_MODULE(wb_slave_model)
+SC_MODULE(tb_dut)
 {
     // channels
-    sc_in<bool>                 clk_i;
-    sc_in<bool>                 rst_i;
-    sc_out<sc_uint<(DWIDTH)> >  dat_o;
-    sc_in<sc_uint<(DWIDTH)> >   dat_i;
-    sc_in<sc_uint<(AWIDTH)> >   adr_i;
-    sc_in<bool>                 cyc_i;
-    sc_in<bool>                 stb_i;
-    sc_in<bool>                 we_i;
-    sc_in<sc_uint<DWIDTH/8> > sel_i;
-    sc_out<bool>                ack_o;
-    sc_out<bool>                err_o;
-    sc_out<bool>                rty_o;
+    sc_in<bool>                 tb_clk;
+    sc_in<bool>                 tb_rst;
+    
 
     std::vector<uint> ram;   
 
@@ -41,7 +32,7 @@ SC_MODULE(wb_slave_model)
     void readMemory(); 
     void setOutData();
 
-    SC_CTOR(wb_slave_model)
+    SC_CTOR(tb_dut)
     {
         readMemory();
 
@@ -58,6 +49,6 @@ SC_MODULE(wb_slave_model)
 
     }
 
-}; // end class wb_slave_model
+}; // end class tb_dut
 
 #endif

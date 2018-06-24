@@ -8,7 +8,37 @@
 
 void wb_slave_model::ackDelayed()
 {
+    err_o.write(0);
+    rty_o.write(0);
+    sc_bit ack;
+    
+    cout<<"Ack Delayed"<<endl;
+    while(true)
+    {
+        if (cyc_i && stb_i)
+        {            
+            ack = 0;
+            ack_o.write(ack);
+            
+            wait();
+            wait();
+            if (cyc_i && stb_i)
+            {            
+                ack = 1;
+            }
+            else
+            {
+                ack = 0;
+            }
+        }
+        else
+        {
+            ack = 0;
+        }
 
+        ack_o.write(ack);
+        wait();
+    }
 }
 
 void wb_slave_model::setOutData()
@@ -27,9 +57,9 @@ void wb_slave_model::setOutData()
     data_out=(ram[memAddress & 3],ram[memAddress & 2],ram[memAddress & 1],ram[memAddress]);
     dat_o.write(data_out) ; 
 
-    cout<<"Out - Address : "<<address_in<<endl;
-    cout<<"Out - Memory Address : "<<memAddress<<endl;
-    cout<<"Out - Data: "<<data_out<<endl;         
+    // cout<<"Out - Address : "<<address_in<<endl;
+    // cout<<"Out - Memory Address : "<<memAddress<<endl;
+    // cout<<"Out - Data: "<<data_out<<endl;         
 }
 
 
@@ -75,9 +105,9 @@ void wb_slave_model::dataGen()
             ram[memAddress] = data_in.range(31,24);                              
         }
 
-        cout<<"Data In: "<<data_in<<endl;
-        cout<<"Memory Address : "<<memAddress<<endl;
-        cout<<"Memory Data: "<<ram[memAddress]<<endl;
+        // cout<<"Data In: "<<data_in<<endl;
+        // cout<<"Memory Address : "<<memAddress<<endl;
+        // cout<<"Memory Data: "<<ram[memAddress]<<endl;
 
         wait();
     }
