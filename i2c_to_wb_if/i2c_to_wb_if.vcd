@@ -1,0 +1,449 @@
+$date
+     Jun 24, 2018       09:51:54
+$end
+
+$version
+ SystemC 2.3.2-Accellera --- May 23 2018 22:35:13
+$end
+
+$timescale
+     1 ns
+$end
+
+$scope module SystemC $end
+$var wire    1  aaaaa  wb_clk_i       $end
+$var wire    1  aaaab  i2c_data       $end
+$var wire    1  aaaac  i2c_ack_done       $end
+$var wire    8  aaaad  i2c_byte_in [7:0]  $end
+$var wire    8  aaaae  i2c_byte_out [7:0]  $end
+$var wire    1  aaaaf  i2c_parallel_load       $end
+$var wire    1  aaaag  tip_wr_ack       $end
+$var wire    1  aaaah  tip_addr_ack       $end
+$var wire   32  aaaai  wb_data_i [31:0]  $end
+$var wire   32  aaaaj  wb_data_o [31:0]  $end
+$var wire    8  aaaak  wb_addr_o [7:0]  $end
+$var wire    2  aaaal  wb_sel_o [1:0]  $end
+$var wire    1  aaaam  wb_we_o       $end
+$var wire    1  aaaan  wb_cyc_o       $end
+$var wire    1  aaaao  wb_stb_o       $end
+$var wire    1  aaaap  wb_ack_i       $end
+$var wire    1  aaaaq  wb_err_i       $end
+$var wire    1  aaaar  wb_rty_i       $end
+$var wire    1  aaaas  wb_rst_i       $end
+$var wire    8  aaaat  state [7:0]  $end
+$var wire    8  aaaau  next_state [7:0]  $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+1aaaaa
+0aaaab
+0aaaac
+b0 aaaad
+b0 aaaae
+0aaaaf
+0aaaag
+0aaaah
+b0 aaaai
+b0 aaaaj
+b0 aaaak
+b1 aaaal
+0aaaam
+0aaaan
+0aaaao
+0aaaap
+0aaaaq
+0aaaar
+0aaaas
+b1 aaaat
+b1 aaaau
+$end
+
+#1
+0aaaaa
+
+#2
+1aaaaa
+
+#3
+0aaaaa
+
+#4
+1aaaaa
+
+#5
+0aaaaa
+
+#6
+1aaaaa
+
+#7
+0aaaaa
+
+#8
+1aaaaa
+
+#9
+0aaaaa
+
+#10
+1aaaaa
+1aaaas
+
+#11
+0aaaaa
+
+#12
+1aaaaa
+
+#13
+0aaaaa
+
+#14
+1aaaaa
+
+#15
+0aaaaa
+
+#16
+1aaaaa
+
+#17
+0aaaaa
+
+#18
+1aaaaa
+
+#19
+0aaaaa
+
+#20
+1aaaaa
+1aaaab
+0aaaas
+
+#21
+0aaaaa
+
+#22
+1aaaaa
+
+#23
+0aaaaa
+
+#24
+1aaaaa
+
+#25
+0aaaaa
+
+#26
+1aaaaa
+
+#27
+0aaaaa
+
+#28
+1aaaaa
+
+#29
+0aaaaa
+
+#30
+1aaaaa
+1aaaac
+b110001 aaaad
+1aaaah
+b110001001100010011000100110001 aaaaj
+b11 aaaau
+
+#31
+0aaaaa
+
+#32
+1aaaaa
+b11 aaaat
+b100 aaaau
+
+#33
+0aaaaa
+
+#34
+1aaaaa
+b100 aaaat
+b1 aaaau
+
+#35
+0aaaaa
+
+#36
+1aaaaa
+1aaaaf
+1aaaan
+1aaaao
+b1 aaaat
+b100 aaaau
+
+#37
+0aaaaa
+
+#38
+1aaaaa
+0aaaaf
+0aaaan
+0aaaao
+b100 aaaat
+
+#39
+0aaaaa
+
+#40
+1aaaaa
+b11111101 aaaad
+1aaaaf
+1aaaag
+b1 aaaai
+b11111101111111011111110111111101 aaaaj
+1aaaan
+1aaaao
+
+#41
+0aaaaa
+
+#42
+1aaaaa
+
+#43
+0aaaaa
+
+#44
+1aaaaa
+
+#45
+0aaaaa
+
+#46
+1aaaaa
+
+#47
+0aaaaa
+
+#48
+1aaaaa
+
+#49
+0aaaaa
+
+#50
+1aaaaa
+b1000111 aaaad
+b1000111010001110100011101000111 aaaaj
+
+#51
+0aaaaa
+
+#52
+1aaaaa
+
+#53
+0aaaaa
+
+#54
+1aaaaa
+
+#55
+0aaaaa
+
+#56
+1aaaaa
+
+#57
+0aaaaa
+
+#58
+1aaaaa
+
+#59
+0aaaaa
+
+#60
+1aaaaa
+0aaaab
+b10000011 aaaad
+b10000011100000111000001110000011 aaaaj
+
+#61
+0aaaaa
+
+#62
+1aaaaa
+
+#63
+0aaaaa
+
+#64
+1aaaaa
+
+#65
+0aaaaa
+
+#66
+1aaaaa
+
+#67
+0aaaaa
+
+#68
+1aaaaa
+
+#69
+0aaaaa
+
+#70
+1aaaaa
+1aaaab
+b1011 aaaad
+b0 aaaai
+b1011000010110000101100001011 aaaaj
+
+#71
+0aaaaa
+
+#72
+1aaaaa
+
+#73
+0aaaaa
+
+#74
+1aaaaa
+
+#75
+0aaaaa
+
+#76
+1aaaaa
+
+#77
+0aaaaa
+
+#78
+1aaaaa
+
+#79
+0aaaaa
+
+#80
+1aaaaa
+0aaaab
+b111111 aaaad
+0aaaag
+b111111001111110011111100111111 aaaaj
+
+#81
+0aaaaa
+
+#82
+1aaaaa
+
+#83
+0aaaaa
+
+#84
+1aaaaa
+
+#85
+0aaaaa
+
+#86
+1aaaaa
+
+#87
+0aaaaa
+
+#88
+1aaaaa
+
+#89
+0aaaaa
+
+#90
+1aaaaa
+1aaaab
+0aaaac
+b11000011 aaaad
+b11000011110000111100001111000011 aaaaj
+1aaaas
+b1 aaaat
+
+#91
+0aaaaa
+
+#92
+1aaaaa
+0aaaaf
+0aaaan
+0aaaao
+b1 aaaau
+
+#93
+0aaaaa
+
+#94
+1aaaaa
+
+#95
+0aaaaa
+
+#96
+1aaaaa
+
+#97
+0aaaaa
+
+#98
+1aaaaa
+
+#99
+0aaaaa
+
+#100
+1aaaaa
+b11001011 aaaad
+1aaaag
+b1 aaaai
+b11001011110010111100101111001011 aaaaj
+0aaaas
+
+#101
+0aaaaa
+
+#102
+1aaaaa
+
+#103
+0aaaaa
+
+#104
+1aaaaa
+
+#105
+0aaaaa
+
+#106
+1aaaaa
+
+#107
+0aaaaa
+
+#108
+1aaaaa
+
+#109
+0aaaaa
+
+#110
