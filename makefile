@@ -12,19 +12,29 @@ OUT_FILES=*.o *.out *.vcd
 all: glitch_generator.o glitch_filter.o
 	$(CXX) $(CXXFLAGS) main.cpp glitch_generator.o $(LDLIBS) -o i2c_to_wb.out
 
-modelrun: model
-	./model
-model: glitch_generator.o wb_slave_model.o
-	$(CXX) $(CXXFLAGS) Model/tb_model.cpp -o model.out glitch_generator.o wb_slave_model.o $(LDLIBS)
+
+model: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o
+	$(CXX) $(CXXFLAGS) Model/tb_model.cpp tb_dut.h -o model.out \
+	glitch_generator.o wb_slave_model.o i2c_master_model.o $(LDLIBS)
 
 test_glitch_gen:Model/tb_glitch_generator.cpp glitch_generator.o
-	$(CXX) $(CXXFLAGS) Model/tb_glitch_generator.cpp -o testGlitchGen.out glitch_generator.o $(LDLIBS)
+	$(CXX) $(CXXFLAGS) Model/tb_glitch_generator.cpp -o glitch_generator.out glitch_generator.o $(LDLIBS)
+	./glitch_generator.out
+	gtkwave glitch_generator.vcd
 glitch_generator.o: Model/glitch_generator.cpp Model/glitch_generator.h
 	$(CXX) $(CXXFLAGS) -c Model/glitch_generator.cpp Model/glitch_generator.h $(LDLIBS)
 test_wb_wlave:Model/tb_wb_slave_model.cpp wb_slave_model.o
-	$(CXX) $(CXXFLAGS) Model/tb_wb_slave_model.cpp -o testWbSlave.out wb_slave_model.o $(LDLIBS)
+	$(CXX) $(CXXFLAGS) Model/tb_wb_slave_model.cpp -o wb_slave_model.out wb_slave_model.o $(LDLIBS)
+	./wb_slave_model.out
+	gtkwave wb_slave_model.vcd
 wb_slave_model.o: Model/wb_slave_model.cpp Model/wb_slave_model.h
 	$(CXX) $(CXXFLAGS) -c Model/wb_slave_model.cpp Model/wb_slave_model.h $(LDLIBS)
+test_i2c_master: Model/tb_i2c_master_model.cpp i2c_master_model.o
+	$(CXX) $(CXXFLAGS) Model/tb_i2c_master_model.cpp -o i2c_master_model.out i2c_master_model.o $(LDLIBS)
+	./i2c_master_model.out
+	gtkwave i2c_master_model.vcd
+i2c_master_model.o: Model/i2c_master_model.cpp Model/i2c_master_model.h
+	$(CXX) $(CXXFLAGS) -c Model/i2c_master_model.cpp Model/i2c_master_model.h $(LDLIBS)
 
 test_glitch_filter: glitch_filter.o
 	$(CXX) $(CXXFLAGS) tb_glitch_filter.cpp glitch_filter.o $(LDLIBS) -o glitch_filter.out

@@ -4,7 +4,7 @@
 int sc_main (int, char *[]) 
 {
     
-    sc_signal<sc_logic> glitch_in;
+    sc_signal<sc_logic> glitch_start;
     sc_signal<sc_logic> glitch_out;
 
     sc_logic wValue;
@@ -13,30 +13,29 @@ int sc_main (int, char *[])
 
     // Connect the DUT
     glitch_generator glitchGen("glitchGen");
-    glitchGen.in(glitch_in);
-    glitchGen.out(glitch_out);
+    glitchGen.glitch(glitch_start);
+    //glitchGen.out(glitch_out);
 
  
     // Open VCD file
-    sc_trace_file *wf = sc_create_vcd_trace_file("glitchGen");
+    sc_trace_file *wf = sc_create_vcd_trace_file("glitch_generator");
     wf->set_time_unit(1, SC_NS);
     // Dump the desired signals
-    sc_trace(wf, glitch_in, "in");
-    sc_trace(wf, glitch_out, "out");
+    sc_trace(wf, glitch_start, "start");
 
     sc_start(0,SC_NS);
+    sc_start(600,SC_NS);
 
-    cout << "@" << sc_time_stamp()<< endl;
-    for (int i=0;i<100;i++) 
+    for (int i=0;i<10;i++) 
     {
         wValue = '0';
-        glitch_in.write(wValue);
-        sc_start(500,SC_NS);
-        cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
+        glitch_start.write(wValue);
+        sc_start(1000,SC_NS);
+        //cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
         wValue = '1';
-        glitch_in.write(wValue);
-        sc_start(100,SC_NS);
-        cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
+        glitch_start.write(wValue);
+        sc_start(1000,SC_NS);
+        //cout << "@" << sc_time_stamp()<<" Signal:" <<glitch_in.read() <<endl;
     }
     cout << "@" << sc_time_stamp()<< endl;
     

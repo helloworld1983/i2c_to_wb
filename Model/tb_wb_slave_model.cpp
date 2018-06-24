@@ -35,7 +35,7 @@ int sc_main (int, char *[])
     wbSlaveModel.rty_o(rty_o);
 
     // Open VCD file
-    sc_trace_file *wf = sc_create_vcd_trace_file("wbSlaveModel");
+    sc_trace_file *wf = sc_create_vcd_trace_file("wb_slave_model");
     wf->set_time_unit(1, SC_NS);
     // Dump the desired signals
     sc_trace(wf, clk_i, "clk_i");
