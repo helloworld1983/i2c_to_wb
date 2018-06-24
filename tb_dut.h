@@ -52,8 +52,8 @@ SC_MODULE(tb_dut)
     {
         // i2c_master_model
         i2c_master_model i2c_master_model_tb("i2c_master_model");
-        i2c_master_model_tb.i2c_clk(i2c_clk);
-        i2c_master_model_tb.i2c_data(i2c_data);
+        i2c_master_model_tb.i2c_clk(i2c_clk.to_bool());
+        i2c_master_model_tb.i2c_data(i2c_data.to_bool());
         i2c_master_model_tb.task_write_byte_arg(task_write_byte_arg);
         i2c_master_model_tb.task_write_byte_trigger(task_write_byte_trigger);
         i2c_master_model_tb.task_read_byte_arg(task_read_byte_arg);
