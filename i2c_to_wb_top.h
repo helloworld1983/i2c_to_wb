@@ -18,7 +18,7 @@ SC_MODULE (i2c_to_wb_top)
     sc_in< sc_bv<32> >      wb_data_i;
     sc_out< sc_bv<32> >     wb_data_o;
     sc_out< sc_bv<8> >      wb_addr_o;
-    sc_out< sc_bv<2> >      wb_sel_o;
+    sc_out< sc_bv<4> >      wb_sel_o;
     sc_out<bool>            wb_we_o;
     sc_out<bool>            wb_cyc_o;
     sc_out<bool>            wb_stb_o;
