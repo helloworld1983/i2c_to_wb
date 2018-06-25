@@ -20,7 +20,7 @@ SC_MODULE(i2c_to_wb_if)
     sc_in<DW>          wb_data_i;
     sc_out<DW>         wb_data_o;
     sc_out<AW>         wb_addr_o;
-    sc_out< sc_bv<2> >  wb_sel_o;
+    sc_out< sc_bv<4> >  wb_sel_o;
     sc_out<bool>       wb_we_o;
     sc_out<bool>       wb_cyc_o;
     sc_out<bool>       wb_stb_o;
@@ -38,6 +38,7 @@ SC_MODULE(i2c_to_wb_if)
     sc_inout<sc_int<8> > next_state;
     
 
+    void tracing(sc_trace_file *tf);
     void fsm_main(void);
     void fsm_aux(void);
     void getfirstbit(void);
@@ -76,3 +77,4 @@ SC_MODULE(i2c_to_wb_if)
 
 
 };
+

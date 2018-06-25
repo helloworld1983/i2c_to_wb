@@ -9,19 +9,40 @@
   const sc_int<8>  STATE_READ       = 4;
   const sc_int<8>  STATE_READ_WAIT  = 5; 
 
-/*  sc_int<8> i2c_offset_r;
-  sc_int<8> state;
-  sc_int<8> next_state;*/
-
-  //i2c_r_w_bit = 1;
 
 
+/*
+* @fn  tracing()
+* 
+* @details     Common method for all modules, passes the pointer
+*              to .vcd dump file
+*/
+void i2c_to_wb_if::tracing(sc_trace_file *tf)
+{
+    cout << "[VCD]" << "Add glitchFilter Signals to .VCD\n" << endl;
+    const std::string str = this->name();
+
+    // Dump local signals
+    sc_trace(tf, this->i2c_r_w_bit, str+".i2c_r_w_bit");
+    sc_trace(tf, this->i2c_offset_r, str+".i2c_offset_r");
+}
+
+/*
+* @fn  getfirstbit()
+* 
+* @details     Sets the first bit of i2c_byte_in to local var i2c_r_w_bit.
+*/
 void i2c_to_wb_if::getfirstbit()
 {
     sc_bv<1> temp = static_cast< sc_bv<1> >(i2c_byte_in.read().get_bit(0));
     i2c_r_w_bit = (temp);
 }
 
+/*
+* @fn  fsm_main()
+* 
+* @details     Main finite state machine.
+*/
 void i2c_to_wb_if::fsm_main()
 { 
     cout << "wb_rst_i: " << wb_rst_i << "\n" ; 
@@ -36,10 +57,13 @@ void i2c_to_wb_if::fsm_main()
     }
 }
 
+/*
+* @fn  fsm_aux()
+* 
+* @details     Secondary finite state machine.
+*/
 void i2c_to_wb_if::fsm_aux()
 {
-    //cout << "fsm_aux ..." << "\n";
-   
    
     if(state == STATE_IDLE)
     {
@@ -113,9 +137,14 @@ void i2c_to_wb_if::fsm_aux()
         next_state = (STATE_IDLE);
     }
 
-    //cout << "In fsm_aux the next_state is: " << next_state << "\n";
 }
 
+
+/*
+* @fn  wishbone_address()
+* 
+* @details     Sets the wishbone address offset.
+*/
 void i2c_to_wb_if::wishbone_address()
 {
 
@@ -136,6 +165,11 @@ void i2c_to_wb_if::wishbone_address()
     }
 }
 
+/*
+* @fn  byte_lane_select_1()
+* 
+* @details     Sets the wishbone output selector.
+*/
 void i2c_to_wb_if::byte_lane_select_1()
 {
     switch(i2c_offset_r)
@@ -155,6 +189,11 @@ void i2c_to_wb_if::byte_lane_select_1()
     }
 }
 
+/*
+* @fn  byte_lane_select_2()
+* 
+* @details     Sets the wishbone address offset.
+*/
 void i2c_to_wb_if::byte_lane_select_2()
 {
     i2c_byte_out.write(wb_data_i.read().range(0,7));
@@ -177,6 +216,11 @@ void i2c_to_wb_if::byte_lane_select_2()
     }
 }
 
+/*
+* @fn  assignSignal()
+* 
+* @details     Assign the outputs.
+*/
 void i2c_to_wb_if::assignSignal()
 {
     if(state.read() == STATE_READ)

@@ -1,5 +1,5 @@
 $date
-     Jun 24, 2018       09:51:54
+     Jun 24, 2018       21:22:00
 $end
 
 $version
@@ -22,7 +22,7 @@ $var wire    1  aaaah  tip_addr_ack       $end
 $var wire   32  aaaai  wb_data_i [31:0]  $end
 $var wire   32  aaaaj  wb_data_o [31:0]  $end
 $var wire    8  aaaak  wb_addr_o [7:0]  $end
-$var wire    2  aaaal  wb_sel_o [1:0]  $end
+$var wire    4  aaaal  wb_sel_o [3:0]  $end
 $var wire    1  aaaam  wb_we_o       $end
 $var wire    1  aaaan  wb_cyc_o       $end
 $var wire    1  aaaao  wb_stb_o       $end

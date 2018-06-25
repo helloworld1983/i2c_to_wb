@@ -18,7 +18,7 @@ int sc_main (int, char *[]) {
     sc_signal<DW>          wb_data_i;
     sc_signal<DW>         wb_data_o;
     sc_signal<AW>         wb_addr_o;
-    sc_signal< sc_bv<2> >  wb_sel_o;
+    sc_signal< sc_bv<4> >  wb_sel_o;
     sc_signal<bool>       wb_we_o;
     sc_signal<bool>       wb_cyc_o;
     sc_signal<bool>       wb_stb_o;
@@ -31,8 +31,6 @@ int sc_main (int, char *[]) {
 
     sc_clock          wb_clk_i("wb_clk_i", 2, SC_NS ,0.5);
   
-  //sc_clock clock("clock", 10, 0.5, 1, false);
-  //sc_clock clock("clock", 2, SC_NS ,0.5);
 
     i2c_to_wb_if i2cwb ("i2cwb");
     i2cwb.wb_clk_i(wb_clk_i);
