@@ -30,3 +30,12 @@ void glitch_generator::glitchLoop()
         glitch.write(glitchGen);      
     }
 }
+
+void glitch_generator::tracing(sc_trace_file *tf)
+{
+    cout << "INVOKED - "<< "tracing" << endl;
+    const std::string str = this->name();
+    
+    // Dump local signals
+    sc_trace(tf, this->glitch, str+".glitch");
+}

@@ -20,8 +20,9 @@ SC_MODULE(glitch_generator)
     sc_inout<sc_logic> glitch;
 
     void glitchLoop(); 
+    void tracing(sc_trace_file *tf); 
 
-     SC_HAS_PROCESS(glitch_generator);
+    SC_HAS_PROCESS(glitch_generator);
     // constructor
     glitch_generator(sc_module_name name_):
     sc_module(name_)

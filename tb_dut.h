@@ -135,6 +135,16 @@ SC_MODULE(tb_dut)
         // }
     }
 
+    void tracing(sc_trace_file *tf)
+    {
+        cout << "INVOKED - "<< "tracing" << endl;
+        const std::string str = this->name();
+        
+        // Dump local signals
+        sc_trace(tf, this->tb_clk, str+".tb_clk");
+        sc_trace(tf, this->tb_rst, str+".tb_rst");
+    }
+
 }; // end class tb_dut
 
 #endif
