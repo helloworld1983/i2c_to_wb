@@ -15,10 +15,10 @@ SC_MODULE (i2c_to_wb_top)
     sc_out<bool>            i2c_data_oe;
     sc_out<bool>            i2c_clk_oe;
 
-    sc_in< sc_uint<32> >    wb_data_i;
-    sc_out< sc_uint<32> >   wb_data_o;
-    sc_out< sc_uint<8> >    wb_addr_o;
-    sc_out< sc_uint<4> >    wb_sel_o;
+    sc_in< sc_bv<32> >      wb_data_i;
+    sc_out< sc_bv<32> >     wb_data_o;
+    sc_out< sc_bv<8> >      wb_addr_o;
+    sc_out< sc_bv<2> >      wb_sel_o;
     sc_out<bool>            wb_we_o;
     sc_out<bool>            wb_cyc_o;
     sc_out<bool>            wb_stb_o;
@@ -31,24 +31,28 @@ SC_MODULE (i2c_to_wb_top)
 
     // -----------------------------------------> Variables
     
-    // Verilog
-    // reg  [8:0]  i2c_data_in_r;
-    // wire        serial_out = i2c_data_in_r[8];
-    
-    // SystemC
+    // ------- SC_METHOD: i2cDataShiftRegister
+    // Regs
     sc_uint<9> i2c_data_in_r;
 
+    // Transformation variables
     bool t_i2c_r_w_bit = static_cast<bool>(i2c_data_in_r[0]);
     bool t_serial_out = static_cast<bool>(i2c_data_in_r[8]);
+    sc_uint<8> t_i2c_8bit_data_in_r = i2c_data_in_r.range(7,0);
+    sc_bv<8> t_i2c_8bv_data_in_r = static_cast<sc_bv<8> >(t_i2c_8bit_data_in_r);
+    // Intenal TOP signal to Modules
+    sc_signal<bool> i2c_r_w_bit;                    // bit[0] de i2c_data_in_r   (en <sc_bool>)
+    sc_signal<bool> serial_out;                     // bit[8] de i2c_data_in_r   (en <sc_bool>)
+    sc_signal<sc_uint<8> > i2c_8uint_data_in_r;     // bit[7:0] de i2c_data_in_r (en <sc_uint>)
+    sc_signal<sc_bv<8> > i2c_8bv_data_in_r;         // bit[7:0] de i2c_data_in_r (en <sc_bv>)
 
-    sc_signal<bool> serial_out;
-    sc_signal<bool> i2c_r_w_bit;
-    
+    // ------- SC_METHOD: i2cDataOutOfSync
+    // Regs
+    bool i2c_data_oe_r;
+    bool i2c_data_mux_select_r;
 
-    ////////////////// FALTA LOGICA
 
     // -----------------------------------------> Wires
-
     sc_signal<bool>         tip_addr_byte;
     sc_signal<bool>         tip_read_byte;
     sc_signal<bool>         tip_write_byte;
@@ -84,8 +88,9 @@ SC_MODULE (i2c_to_wb_top)
     i2c_to_wb_if i_i2c_to_wb_if;
 
     // -----------------------------------------> Define Methods
-    void templateCppMethod();
-    void templateSystemcMethod();
+    void i2cDataShiftRegister();
+    void i2cDataOutOfSync();
+    void assigns();
 
     // Constructor
     SC_CTOR(i2c_to_wb_top) : i_gf_i2c_data_in("topDataGlitchFilter"),
@@ -95,8 +100,13 @@ SC_MODULE (i2c_to_wb_top)
                              i_i2c_to_wb_if("i_i2c_to_wb_if")
 
     {
+        // -------------------------------------> Wire assignments
         i2c_r_w_bit.write(t_i2c_r_w_bit);
         serial_out.write(t_serial_out);
+        i2c_8uint_data_in_r.write(t_i2c_8bit_data_in_r);
+        i2c_8bv_data_in_r.write(t_i2c_8bit_data_in_r);
+
+
         // -------------------------------------> Glitch Filter 
         // Connect Inputs
         i_gf_i2c_data_in.clk (wb_clk_i);
@@ -116,7 +126,6 @@ SC_MODULE (i2c_to_wb_top)
         i_gf_i2c_clk_in.fall(gf_i2c_clk_in_fall);
 
         // -------------------------------------> FSM
-        
         i_i2c_to_wb_fsm.i2c_data_rise(gf_i2c_data_in_rise);
         i_i2c_to_wb_fsm.i2c_data_fall(gf_i2c_data_in_fall);
         i_i2c_to_wb_fsm.i2c_clk(gf_i2c_clk_in);
@@ -134,7 +143,7 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_fsm.i2c_ack_done(i2c_ack_done);
         i_i2c_to_wb_fsm.i2c_ack_out(i2c_ack_out);
         i_i2c_to_wb_fsm.i2c_data(gf_i2c_data_in);
-        i_i2c_to_wb_fsm.i2c_r_w_bit(i2c_r_w_bit);              // problema sc_bool
+        i_i2c_to_wb_fsm.i2c_r_w_bit(i2c_r_w_bit);                   // problema sc_bool/sc_lv/sc_bv
         i_i2c_to_wb_fsm.tip_addr_byte(tip_addr_byte);
         i_i2c_to_wb_fsm.tip_addr_ack(tip_addr_ack);
         i_i2c_to_wb_fsm.tip_read_byte(tip_read_byte);
@@ -143,31 +152,27 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_fsm.tip_rd_ack(tip_rd_ack);
         //i_i2c_to_wb_fsm.i2c_error();                              // problema N/C
         
-
         // -------------------------------------> Config
-        /*
-        i_i2c_to_wb_config.i2c_byte_in(i2c_data_in_r);              // problema sc_lv
+        i_i2c_to_wb_config.i2c_byte_in(i2c_8uint_data_in_r);        // problema sc_bool/sc_lv/sc_bv
         i_i2c_to_wb_config.tip_addr_ack(tip_addr_ack);
         i_i2c_to_wb_config.i2c_ack_out(i2c_ack_out);
         i_i2c_to_wb_config.wb_clk_i(wb_clk_i);
         i_i2c_to_wb_config.wb_rst_i(wb_rst_i);
-        */
-
+        
         // -------------------------------------> "if"
-        /*
         i_i2c_to_wb_if.i2c_data(gf_i2c_data_in);
         i_i2c_to_wb_if.i2c_ack_done(i2c_ack_done);
-        i_i2c_to_wb_if.i2c_byte_in(i2c_data_in_r);                  // problema sc_bv
-        i_i2c_to_wb_if.i2c_byte_out(i2c_byte_out);                  // problema sc_bv
+        i_i2c_to_wb_if.i2c_byte_in(i2c_8bv_data_in_r);              // problema sc_bool/sc_lv/sc_bv
+        i_i2c_to_wb_if.i2c_byte_out(i2c_byte_out);                  // problema sc_bv ... TOP se puede adaptar
         i_i2c_to_wb_if.i2c_parallel_load(i2c_parallel_load);
         i_i2c_to_wb_if.tip_wr_ack(tip_wr_ack);
         i_i2c_to_wb_if.tip_rd_ack(tip_rd_ack);
         i_i2c_to_wb_if.tip_addr_ack(tip_addr_ack);
 
-        i_i2c_to_wb_if.wb_data_i(wb_data_i);                        // problema sc_bv
-        i_i2c_to_wb_if.wb_data_o(wb_data_o);                        // problema sc_bv
-        i_i2c_to_wb_if.wb_addr_o(wb_addr_o);                        // problema sc_bv
-        i_i2c_to_wb_if.wb_sel_o(wb_sel_o);
+        i_i2c_to_wb_if.wb_data_i(wb_data_i);                        // problema sc_bv ... TOP se puede adaptar
+        i_i2c_to_wb_if.wb_data_o(wb_data_o);                        // problema sc_bv ... TOP se puede adaptar
+        i_i2c_to_wb_if.wb_addr_o(wb_addr_o);                        // problema sc_bv ... TOP se puede adaptar
+        i_i2c_to_wb_if.wb_sel_o(wb_sel_o);                          // problema sc_bv <2>? bug ... TOP se puede adaptar
         i_i2c_to_wb_if.wb_we_o(wb_we_o);
         i_i2c_to_wb_if.wb_cyc_o(wb_cyc_o);
         i_i2c_to_wb_if.wb_stb_o(wb_stb_o);
@@ -177,10 +182,21 @@ SC_MODULE (i2c_to_wb_top)
 
         i_i2c_to_wb_if.wb_clk_i(wb_clk_i);
         i_i2c_to_wb_if.wb_rst_i(wb_rst_i);
-        */
 
         // -------------------------------------> Methods
-        SC_METHOD(templateSystemcMethod);
+        SC_METHOD(i2cDataShiftRegister);
+            sensitive << wb_clk_i.pos();
+        SC_METHOD(i2cDataOutOfSync);
+            sensitive << wb_clk_i.pos();
+        SC_METHOD(assigns);
+            sensitive << i2c_clk_in;
+            sensitive << i2c_data_in;
+            sensitive << wb_data_i;
+            sensitive << wb_ack_i;
+            sensitive << wb_err_i;
+            sensitive << wb_rty_i;
+            sensitive << wb_clk_i;
+            sensitive << wb_rst_i;
     }
     
 };  // End of Module

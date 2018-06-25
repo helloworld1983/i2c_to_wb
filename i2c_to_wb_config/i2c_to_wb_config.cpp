@@ -4,18 +4,24 @@
 
 void i2c_to_wb_config::process(void)
 {
-	bool		i2c_addr_ack_out_r;
+	bool i2c_addr_ack_out_r;
 	std::string	tmp_byte;
 
-
-	tmp_byte = i2c_byte_in.read().to_string();
+	//tmp_byte = i2c_byte_in.read().to_string();
 	//std::cout << "Value received: " << tmp_byte << "\n";
 
-	if ((tmp_byte.compare("11110000") == 0) ||
-	    (tmp_byte.compare("11110001") == 0)) {
+	std::cout << "Value received: " << i2c_byte_in << "\n";
+
+	//if ((tmp_byte.compare("11110000") == 0) ||
+	//    (tmp_byte.compare("11110001") == 0)) {
+
+	if ((i2c_byte_in.read() == 0xF0) || 
+	    (i2c_byte_in.read() == 0xF1))
+	{
 		i2c_addr_ack_out_r = false;
 	}
-	else {
+	else 
+	{
 		i2c_addr_ack_out_r = true;
 	}
 
