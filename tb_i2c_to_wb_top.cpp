@@ -14,7 +14,7 @@ int sc_main (int argc, char* argv[])
   sc_signal< sc_bv<32> >  wb_data_i;
   sc_signal< sc_bv<32> >  wb_data_o;
   sc_signal< sc_bv<8> >   wb_addr_o;
-  sc_signal< sc_bv<2> >   wb_sel_o;
+  sc_signal< sc_bv<4> >   wb_sel_o;
   sc_signal<bool>         wb_we_o;
   sc_signal<bool>         wb_cyc_o;
   sc_signal<bool>         wb_stb_o;
