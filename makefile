@@ -14,6 +14,8 @@ all: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
 	$(CXX) $(CXXFLAGS) tb_top.cpp tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
 	i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o -o i2c_to_wb.out $(LDLIBS) 
 
+run:
+	./i2c_to_wb.out
 
 model: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o
 	$(CXX) $(CXXFLAGS) Model/tb_model.cpp tb_dut.h \

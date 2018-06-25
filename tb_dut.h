@@ -122,11 +122,17 @@ SC_MODULE(tb_dut)
         sc_bit i2c_clk_bit;
         sc_bit i2c_data_bit;
         
-        i2c_clk_bit = i2c_clk.read();
-        i2c_data_bit = i2c_data.read();
+        if((i2c_clk.read()!='z')&&(i2c_clk.read()!='x'))
+        {
+            i2c_clk_bit = i2c_clk.read();
+            i2c_clk_b.write(i2c_clk_bit);
+        }
 
-        i2c_clk_b.write(i2c_clk_bit);
-        i2c_data_b.write(i2c_data_bit);
+        // if((i2c_data.read()!='z')&&(i2c_data.read()!='x')))
+        // {
+        //     i2c_data_bit = i2c_data.read();
+        //     i2c_data_b.write(i2c_data_bit);
+        // }
     }
 
 }; // end class tb_dut
