@@ -73,8 +73,8 @@ test_top: tb_i2c_to_wb_top.cpp i2c_to_wb_top.o
 	$(CXX) $(CXXFLAGS) tb_i2c_to_wb_top.cpp i2c_to_wb_top.o -o i2c_to_wb_top.out $(LDLIBS)
 	./i2c_to_wb_top.out
 	gtkwave i2c_to_wb_top.vcd
-i2c_to_wb_top.o: i2c_to_wb_top.cpp
-	$(CXX) $(CXXFLAGS) -c i2c_to_wb_top.cpp $(LDLIBS)
+i2c_to_wb_top.o: i2c_to_wb_top.cpp i2c_to_wb_top.h
+	$(CXX) $(CXXFLAGS) -c i2c_to_wb_top.cpp i2c_to_wb_top.h $(LDLIBS)
 
 clean:
 	rm -f $(OUT_FILES)
