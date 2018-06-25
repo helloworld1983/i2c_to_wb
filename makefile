@@ -69,8 +69,10 @@ test_config:i2c_to_wb_config/tb_i2c_to_wb_config.cpp i2c_to_wb_config.o
 i2c_to_wb_config.o: i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_to_wb_config.h
 	$(CXX) $(CXXFLAGS) -c i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_to_wb_config.h $(LDLIBS)
 
-test_top: tb_i2c_to_wb_top.cpp i2c_to_wb_top.o
-	$(CXX) $(CXXFLAGS) tb_i2c_to_wb_top.cpp i2c_to_wb_top.o -o i2c_to_wb_top.out $(LDLIBS)
+test_top: tb_i2c_to_wb_top.cpp i2c_to_wb_top.o i2c_to_wb_fsm.o i2c_to_wb_config.o \
+	i2c_to_wb_if.o
+	$(CXX) $(CXXFLAGS) tb_i2c_to_wb_top.cpp i2c_to_wb_top.o i2c_to_wb_fsm.o \
+	i2c_to_wb_config.o i2c_to_wb_if.o -o i2c_to_wb_top.out $(LDLIBS)
 	./i2c_to_wb_top.out
 	gtkwave i2c_to_wb_top.vcd
 i2c_to_wb_top.o: i2c_to_wb_top.cpp i2c_to_wb_top.h
