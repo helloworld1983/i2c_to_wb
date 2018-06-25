@@ -1,12 +1,12 @@
 #include <systemc.h>
 #include "i2c_to_wb_config.h"
 
-void test_value(sc_signal<sc_lv<8>> *byte);
+void test_value(sc_signal<sc_uint<8>> *byte);
 
 int sc_main(int argc, char* argv[])
 {
 	// Local Variables
-	sc_signal<sc_lv<8> >	i2c_byte_in;
+	sc_signal< sc_uint<8> >	i2c_byte_in;
 	sc_signal<bool>		tip_addr_ack;
 	sc_signal<bool>		i2c_ack_out;
 
@@ -26,7 +26,7 @@ int sc_main(int argc, char* argv[])
 	config.wb_rst_i(wb_rst_i);
 
 	// Set default values
-	i2c_byte_in = "00000000";
+	i2c_byte_in = 0;
 	tip_addr_ack = false;
 	wb_rst_i = false;
 
@@ -52,61 +52,62 @@ int sc_main(int argc, char* argv[])
 	wb_rst_i = true;
 	test_value(&i2c_byte_in);
 
+	sc_start(100, SC_NS);
 	sc_close_vcd_trace_file(wf);
 
 	return 0;
 }
 
-void test_value(sc_signal<sc_lv<8>> *byte)
+void test_value(sc_signal<sc_uint<8>> *byte)
 {
-	(*byte) = "00000000";
+	(*byte) = 0x00;
 	sc_start(10, SC_NS);
 
-	(*byte) = "00000001";
+	(*byte) = 0x01;
 	sc_start(10, SC_NS);
 
-	(*byte) = "0000000X";
+	//(*byte) = "0000000X";
+	//sc_start(10, SC_NS);
+
+	//(*byte) = "0000000Z";
+	//sc_start(10, SC_NS);
+
+	(*byte) = 0xF0;
 	sc_start(10, SC_NS);
 
-	(*byte) = "0000000Z";
+	(*byte) = 0xF1;
 	sc_start(10, SC_NS);
 
-	(*byte) = "11110000";
+	//(*byte) = "1111000X";
+	//sc_start(10, SC_NS);
+
+	//(*byte) = "1111000Z";
+	//sc_start(10, SC_NS);
+
+	(*byte) = 0xFF;
 	sc_start(10, SC_NS);
 
-	(*byte) = "11110001";
-	sc_start(10, SC_NS);
+	//(*byte) = "XXXXXXXX";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "1111000X";
-	sc_start(10, SC_NS);
+	//(*byte) = "ZZZZZZZZ";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "1111000Z";
-	sc_start(10, SC_NS);
+	//(*byte) = "XXXX0000";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "11111111";
-	sc_start(10, SC_NS);
+	//(*byte) = "0000XXXX";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "XXXXXXXX";
-	sc_start(10, SC_NS);
+	//(*byte) = "XXXX1111";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "ZZZZZZZZ";
-	sc_start(10, SC_NS);
+	//(*byte) = "1111XXXX";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "XXXX0000";
-	sc_start(10, SC_NS);
+	//(*byte) = "XXXXZZZZ";
+	//sc_start(10, SC_NS);
 
-	(*byte) = "0000XXXX";
-	sc_start(10, SC_NS);
-
-	(*byte) = "XXXX1111";
-	sc_start(10, SC_NS);
-
-	(*byte) = "1111XXXX";
-	sc_start(10, SC_NS);
-
-	(*byte) = "XXXXZZZZ";
-	sc_start(10, SC_NS);
-
-	(*byte) = "ZZZZXXXX";
-	sc_start(10, SC_NS);
+	//(*byte) = "ZZZZXXXX";
+	//sc_start(10, SC_NS);
 }

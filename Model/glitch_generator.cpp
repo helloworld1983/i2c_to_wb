@@ -9,23 +9,24 @@
 void glitch_generator::glitchLoop()
 {
     int waitTime = 0;
-    sc_logic glitch;
-    glitch = 'z';
+    sc_logic glitchGen;
+    glitchGen = 'z';
 
     while(true)
     {        
+        glitchGen = '0';
         waitTime = (rand() % MAX_FREQ);
         wait(waitTime,SC_NS);
-        out.write(glitch);
+        glitch.write(glitchGen);
 
         waitTime = (rand() % MAX_WIDTH);
         wait(waitTime,SC_NS);
-        glitch = '1';
-        out.write(glitch);
+        glitchGen = '1';
+        glitch.write(glitchGen);
   
         waitTime = (rand() % MAX_WIDTH);
         wait(waitTime,SC_NS);
-        glitch = 'z';
-        out.write(glitch);      
+        glitchGen = 'z';
+        glitch.write(glitchGen);      
     }
 }

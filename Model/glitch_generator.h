@@ -16,8 +16,8 @@
 SC_MODULE(glitch_generator)
 {
   // channels
-    sc_out<sc_logic> in;
-    sc_out<sc_logic> out;
+    //sc_out<sc_logic> start;
+    sc_inout<sc_logic> glitch;
 
     void glitchLoop(); 
 
@@ -25,9 +25,9 @@ SC_MODULE(glitch_generator)
     // constructor
     glitch_generator(sc_module_name name_):
     sc_module(name_)
-    {
+    {        
         SC_THREAD(glitchLoop);
-        sensitive << in;
+        sensitive << glitch;
     }
 
 }; // end class glitch_generator
