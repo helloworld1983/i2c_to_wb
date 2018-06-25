@@ -6,13 +6,13 @@ int sc_main (int, char *[])
     //sc_signal<bool>                 clk_i;
     sc_clock clk_i("clk_i", 50, SC_NS, 0.5);
     sc_signal<bool>                 rst_i;
-    sc_signal<sc_uint<(DWIDTH)> >   dat_o;
-    sc_signal<sc_uint<(DWIDTH)> >   dat_i;
-    sc_signal<sc_uint<(AWIDTH)> >   adr_i;
+    sc_signal<sc_bv<(DWIDTH)> >   dat_o;
+    sc_signal<sc_bv<(DWIDTH)> >   dat_i;
+    sc_signal<sc_bv<(AWIDTH)> >   adr_i;
     sc_signal<bool>                 cyc_i;
     sc_signal<bool>                 stb_i;
     sc_signal<bool>                 we_i;
-    sc_signal<sc_uint<(DWIDTH)/8> > sel_i;
+    sc_signal<sc_bv<(DWIDTH)/8> > sel_i;
     sc_signal<bool>                 ack_o;
     sc_signal<bool>                 err_o;
     sc_signal<bool>                 rty_o;

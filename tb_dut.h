@@ -44,10 +44,10 @@ SC_MODULE(tb_dut)
     sc_signal<bool>             i2c_data_oe;
     sc_signal<bool>             i2c_clk_oe;
 
-    sc_signal< sc_uint<32> >    wb_data_i;
-    sc_signal< sc_uint<32> >    wb_data_o;
-    sc_signal< sc_uint<8> >     wb_addr_o;
-    sc_signal< sc_uint<4> >     wb_sel_o;
+    sc_signal< sc_bv<32> >    wb_data_i;
+    sc_signal< sc_bv<32> >    wb_data_o;
+    sc_signal< sc_bv<8> >     wb_addr_o;
+    sc_signal< sc_bv<4> >       wb_sel_o;
     sc_signal<bool>             wb_we_o;
     sc_signal<bool>             wb_cyc_o;
     sc_signal<bool>             wb_stb_o;

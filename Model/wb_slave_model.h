@@ -23,13 +23,13 @@ SC_MODULE(wb_slave_model)
     // channels
     sc_in<bool>                 clk_i;
     sc_in<bool>                 rst_i;
-    sc_out<sc_uint<(DWIDTH)> >  dat_o;
-    sc_in<sc_uint<(DWIDTH)> >   dat_i;
-    sc_in<sc_uint<(AWIDTH)> >   adr_i;
+    sc_out<sc_bv<(DWIDTH)> >  dat_o;
+    sc_in<sc_bv<(DWIDTH)> >   dat_i;
+    sc_in<sc_bv<(AWIDTH)> >   adr_i;
     sc_in<bool>                 cyc_i;
     sc_in<bool>                 stb_i;
     sc_in<bool>                 we_i;
-    sc_in<sc_uint<DWIDTH/8> > sel_i;
+    sc_in<sc_bv<DWIDTH/8> > sel_i;
     sc_out<bool>                ack_o;
     sc_out<bool>                err_o;
     sc_out<bool>                rty_o;

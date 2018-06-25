@@ -20,7 +20,7 @@ run:
 model: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o
 	$(CXX) $(CXXFLAGS) Model/tb_model.cpp tb_dut.h \
 	glitch_generator.o wb_slave_model.o i2c_master_model.o -o model.out $(LDLIBS)
-	
+	./model.out
 
 test_glitch_gen:Model/tb_glitch_generator.cpp glitch_generator.o
 	$(CXX) $(CXXFLAGS) Model/tb_glitch_generator.cpp glitch_generator.o -o glitch_generator.out $(LDLIBS)
@@ -29,7 +29,7 @@ test_glitch_gen:Model/tb_glitch_generator.cpp glitch_generator.o
 glitch_generator.o: Model/glitch_generator.cpp Model/glitch_generator.h
 	$(CXX) $(CXXFLAGS) -c Model/glitch_generator.cpp Model/glitch_generator.h $(LDLIBS)
 test_wb_wlave:Model/tb_wb_slave_model.cpp wb_slave_model.o
-	$(CXX) $(CXXFLAGS) Model/tb_wb_slave_model.cpp -o wb_slave_model.o wb_slave_model.out $(LDLIBS)
+	$(CXX) $(CXXFLAGS) Model/tb_wb_slave_model.cpp wb_slave_model.o -o wb_slave_model.out $(LDLIBS)
 	./wb_slave_model.out
 	gtkwave wb_slave_model.vcd
 wb_slave_model.o: Model/wb_slave_model.cpp Model/wb_slave_model.h
