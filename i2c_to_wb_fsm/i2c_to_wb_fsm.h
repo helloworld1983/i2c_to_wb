@@ -3,6 +3,9 @@
 // Autor: Fernando Paris K.
 // ITCR 2018
 
+#ifndef I2C_TO_WB_FSM_H
+#define I2C_TO_WB_FSM_H
+
 #include <systemc.h>
 #include <stdlib.h>
 
@@ -142,3 +145,4 @@ SC_MODULE(i2c_to_wb_fsm)
             sensitive << state;                                         
     }   
 };
+#endif
