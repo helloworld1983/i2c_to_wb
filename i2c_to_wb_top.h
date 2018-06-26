@@ -29,6 +29,12 @@ SC_MODULE (i2c_to_wb_top)
     sc_in<bool>             wb_clk_i;
     sc_in<bool>             wb_rst_i;
 
+    //////////////////////// Delete
+    sc_signal<sc_int<8> >   dummy_if_state;
+    sc_signal<sc_int<8> >   dummy2_if_next_state;
+    sc_signal<bool>         dummy3_fsm_i2c_error;
+    sc_signal<sc_bv<8>>     dummy4_state_out;
+
     // -----------------------------------------> Variables
     
     // ------- SC_METHOD: i2cDataShiftRegister
@@ -78,14 +84,11 @@ SC_MODULE (i2c_to_wb_top)
 
     // -----------------------------------------> Module Instances
     // Instance Glitch Modules
-    glitchFilter i_gf_i2c_data_in;
-    glitchFilter i_gf_i2c_clk_in;
-    // Instance Finite State Machine
-    i2c_to_wb_fsm i_i2c_to_wb_fsm;
-    // Instance Config
-    i2c_to_wb_config i_i2c_to_wb_config;
-    // "If"
-    i2c_to_wb_if i_i2c_to_wb_if;
+    glitchFilter i_gf_i2c_data_in{"topDataGlitchFilter"};
+    glitchFilter i_gf_i2c_clk_in{"topClockGlitchFilter"};
+    i2c_to_wb_fsm i_i2c_to_wb_fsm{"topFSM"};
+    i2c_to_wb_config i_i2c_to_wb_config{"topConfig"};
+    i2c_to_wb_if i_i2c_to_wb_if{"i_i2c_to_wb_if"};
 
     // -----------------------------------------> Define Methods
     void i2cDataShiftRegister();
@@ -93,19 +96,22 @@ SC_MODULE (i2c_to_wb_top)
     void assigns();
 
     // Constructor
-    SC_CTOR(i2c_to_wb_top) : i_gf_i2c_data_in("topDataGlitchFilter"),
-                             i_gf_i2c_clk_in("topClockGlitchFilter"),
-                             i_i2c_to_wb_fsm("topFSM"),
-                             i_i2c_to_wb_config("topConfig"),
-                             i_i2c_to_wb_if("i_i2c_to_wb_if")
-
+    SC_CTOR(i2c_to_wb_top)
     {
-        // -------------------------------------> Wire assignments
-        i2c_r_w_bit.write(t_i2c_r_w_bit);
-        serial_out.write(t_serial_out);
-        i2c_8uint_data_in_r.write(t_i2c_8bit_data_in_r);
-        i2c_8bv_data_in_r.write(t_i2c_8bit_data_in_r);
-
+        // -------------------------------------> Methods
+        SC_METHOD(i2cDataShiftRegister);
+            sensitive << wb_clk_i.pos();
+        SC_METHOD(i2cDataOutOfSync);
+            sensitive << wb_clk_i.pos();
+        SC_METHOD(assigns);
+            sensitive << i2c_clk_in;
+            sensitive << i2c_data_in;
+            sensitive << wb_data_i;
+            sensitive << wb_ack_i;
+            sensitive << wb_err_i;
+            sensitive << wb_rty_i;
+            sensitive << wb_clk_i;
+            sensitive << wb_rst_i;
 
         // -------------------------------------> Glitch Filter 
         // Connect Inputs
@@ -134,7 +140,7 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_fsm.wb_rst_i(wb_rst_i);
         i_i2c_to_wb_fsm.wb_clk_i(wb_clk_i);
         //i2c.nxt_st(nxt_st);
-        //i_i2c_to_wb_fsm.state_out();                              // problema N/C
+        i_i2c_to_wb_fsm.state_out(dummy4_state_out);                // problema N/C
         i_i2c_to_wb_fsm.i2c_clk_rise(gf_i2c_clk_in_rise);
         i_i2c_to_wb_fsm.i2c_clk_fall(gf_i2c_clk_in_fall);
         //i2c.xmt_byte_done(xmt_byte_done);
@@ -150,9 +156,10 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_fsm.tip_write_byte(tip_write_byte);  
         i_i2c_to_wb_fsm.tip_wr_ack(tip_wr_ack);      
         i_i2c_to_wb_fsm.tip_rd_ack(tip_rd_ack);
-        //i_i2c_to_wb_fsm.i2c_error();                              // problema N/C
+        i_i2c_to_wb_fsm.i2c_error(dummy3_fsm_i2c_error);            // problema N/C
         
         // -------------------------------------> Config
+        
         i_i2c_to_wb_config.i2c_byte_in(i2c_8uint_data_in_r);        // problema sc_bool/sc_lv/sc_bv
         i_i2c_to_wb_config.tip_addr_ack(tip_addr_ack);
         i_i2c_to_wb_config.i2c_ack_out(i2c_ack_out);
@@ -160,6 +167,7 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_config.wb_rst_i(wb_rst_i);
         
         // -------------------------------------> "if"
+        
         i_i2c_to_wb_if.i2c_data(gf_i2c_data_in);
         i_i2c_to_wb_if.i2c_ack_done(i2c_ack_done);
         i_i2c_to_wb_if.i2c_byte_in(i2c_8bv_data_in_r);              // problema sc_bool/sc_lv/sc_bv
@@ -183,20 +191,9 @@ SC_MODULE (i2c_to_wb_top)
         i_i2c_to_wb_if.wb_clk_i(wb_clk_i);
         i_i2c_to_wb_if.wb_rst_i(wb_rst_i);
 
-        // -------------------------------------> Methods
-        SC_METHOD(i2cDataShiftRegister);
-            sensitive << wb_clk_i.pos();
-        SC_METHOD(i2cDataOutOfSync);
-            sensitive << wb_clk_i.pos();
-        SC_METHOD(assigns);
-            sensitive << i2c_clk_in;
-            sensitive << i2c_data_in;
-            sensitive << wb_data_i;
-            sensitive << wb_ack_i;
-            sensitive << wb_err_i;
-            sensitive << wb_rty_i;
-            sensitive << wb_clk_i;
-            sensitive << wb_rst_i;
+        ///////////////// Delete
+        i_i2c_to_wb_if.state(dummy_if_state);
+        i_i2c_to_wb_if.next_state(dummy2_if_next_state);
     }
     
 };  // End of Module
