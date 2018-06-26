@@ -107,7 +107,7 @@ void i2c_to_wb_top::tracing(sc_trace_file *tf)
     // Dump Internal Modules Signals
     i_gf_i2c_data_in.tracing(tf);
     i_gf_i2c_clk_in.tracing(tf);
-    //i_i2c_to_wb_fsm.tracing(tf);
+    i_i2c_to_wb_fsm.tracing(tf);
     //i_i2c_to_wb_config.tracing(tf);
     i_i2c_to_wb_if.tracing(tf);
 }
