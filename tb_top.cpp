@@ -22,6 +22,43 @@ int sc_main (int, char *[])
 
     cout << "@" << sc_time_stamp()<< endl;
     
+    sc_start(100,SC_NS); 
+
+    dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(241); //f1
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(1);
+    
+    // dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(16); //10
+    // dut.i2cMasterModel.write_byte(171); //ab
+    // dut.i2cMasterModel.write_byte(186); //ba
+    
+    // dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(240); //f0
+    // dut.i2cMasterModel.write_byte(190); //be
+    // dut.i2cMasterModel.write_byte(239); //ef
+    
+    // dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(203); //cb
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(1);
+    
+    // dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(241); //f1
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(1);
+    
+    // dut.i2cMasterModel.start();
+    // dut.i2cMasterModel.write_byte(219); //db
+    // dut.i2cMasterModel.read_byte(0);
+    // dut.i2cMasterModel.read_byte(1);
+    //dut.i2cMasterModel.stop();
     sc_start(1000,SC_NS); 
 
     cout << "@" << sc_time_stamp()<< endl;

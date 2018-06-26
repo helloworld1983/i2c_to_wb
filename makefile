@@ -16,6 +16,7 @@ all: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
 
 run:
 	./i2c_to_wb.out
+	gtkwave tb_top.vcd
 
 model: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o
 	$(CXX) $(CXXFLAGS) Model/tb_model.cpp tb_dut.h \
