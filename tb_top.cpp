@@ -6,9 +6,13 @@ int sc_main (int, char *[])
     sc_clock tb_clk("tb_clk", 50, SC_NS, 0.5);
     sc_signal<bool> tb_rst;
 
+    sc_trace_file *tf = sc_create_vcd_trace_file("tb_top");
+    tf->set_time_unit(1, SC_PS);
+
     tb_dut dut("dut");
     dut.tb_clk(tb_clk);
     dut.tb_rst(tb_rst);
+    dut.tracing(tf);
     
     // the_test test("test");
     // test.tb_clk(tb_clk);

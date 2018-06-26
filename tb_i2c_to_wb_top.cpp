@@ -4,8 +4,8 @@
 int sc_main (int argc, char* argv[]) 
 { 
   // -------------------------------------------> Define Ports
-  sc_clock i2c_clk_in("i2c_clk_in", 2, SC_NS, 0.5);
   sc_signal<bool>         i2c_data_in;
+  sc_clock i2c_clk_in("i2c_clk_in", 2, SC_NS, 0.5);
   sc_signal<bool>         i2c_data_out;
   sc_signal<bool>         i2c_clk_out;
   sc_signal<bool>         i2c_data_oe;
@@ -26,9 +26,10 @@ int sc_main (int argc, char* argv[])
   sc_signal<bool>         wb_rst_i;
 
   // -------------------------------------------> DUT Instance
-  i2c_to_wb_top i2c_to_wb_top_tb("i2c_to_wb_top");                  // BOOOOOM
-    /*
+  i2c_to_wb_top i2c_to_wb_top_tb("i2c_to_wb_top");
+    
     i2c_to_wb_top_tb.i2c_data_in(i2c_data_in);
+    i2c_to_wb_top_tb.i2c_clk_in(i2c_clk_in);
     i2c_to_wb_top_tb.i2c_data_out(i2c_data_out);
     i2c_to_wb_top_tb.i2c_clk_out(i2c_clk_out);
     i2c_to_wb_top_tb.i2c_data_oe(i2c_data_oe);
@@ -47,16 +48,15 @@ int sc_main (int argc, char* argv[])
 
     i2c_to_wb_top_tb.wb_clk_i(wb_clk_i);
     i2c_to_wb_top_tb.wb_rst_i(wb_rst_i);
-    */
 
   // -------------------------------------------> Setup .vcd
     // Open VCD file and configure time unit
     sc_trace_file *tf = sc_create_vcd_trace_file("i2c_to_wb_top");
     tf->set_time_unit(1, SC_NS);
 
-    /*
     // Dump local signals
     sc_trace(tf, i2c_data_in,  "i2c_data_in");
+    sc_trace(tf, i2c_clk_in,   "i2c_clk_in");
     sc_trace(tf, i2c_data_out, "i2c_data_out");
     sc_trace(tf, i2c_clk_out,  "i2c_clk_out");
     sc_trace(tf, i2c_data_oe,  "i2c_data_oe");
@@ -73,7 +73,7 @@ int sc_main (int argc, char* argv[])
     sc_trace(tf, wb_rty_i,     "wb_rty_i");
     sc_trace(tf, wb_clk_i,     "wb_clk_i");
     sc_trace(tf, wb_rst_i,     "wb_rst_i");
-    */
+    
 
   cout << "@" << sc_time_stamp() <<" Terminating simulation\n" << endl;
   

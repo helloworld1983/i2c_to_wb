@@ -140,3 +140,23 @@ void wb_slave_model::readMemory()
         //_exit(0);
     }
 }
+
+void wb_slave_model::tracing(sc_trace_file *tf)
+{
+    cout << "INVOKED - "<< "tracing" << endl;
+    const std::string str = this->name();
+
+    // Dump the desired signals
+    sc_trace(tf, this->clk_i, str+".clk_i");
+    sc_trace(tf, this->rst_i, str+".rst_i");
+    sc_trace(tf, this->dat_o, str+".dat_o");
+    sc_trace(tf, this->dat_i, str+".dat_i");
+    sc_trace(tf, this->adr_i, str+".adr_i");
+    sc_trace(tf, this->cyc_i, str+".cyc_i");
+    sc_trace(tf, this->stb_i, str+".stb_i");
+    sc_trace(tf, this->we_i, str+".we_i");
+    sc_trace(tf, this->sel_i, str+".sel_i");
+    sc_trace(tf, this->ack_o, str+".ack_o");
+    sc_trace(tf, this->err_o, str+".err_o");
+    sc_trace(tf, this->rty_o, str+".rty_o");
+}

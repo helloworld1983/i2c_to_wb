@@ -34,7 +34,9 @@ SC_MODULE(wb_slave_model)
     sc_out<bool>                err_o;
     sc_out<bool>                rty_o;
 
-    std::vector<uint> ram;   
+    std::vector<uint> ram;  
+
+    void tracing(sc_trace_file *tf); 
 
     void ackDelayed();
     void dataGen();
