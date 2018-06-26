@@ -55,11 +55,11 @@ SC_MODULE(tb_dut)
     sc_signal<bool>             wb_err_i;
     sc_signal<bool>             wb_rty_i;
  
-        i2c_master_model i2cMasterModel{"i2c_maslter_model"};
-        i2c_to_wb_top i2cWbTop{"i2cWbTop"};
-        wb_slave_model wbSlaveModel{"wbSlaveModel"};
-        glitch_generator glitchGen1{"glitchGen1"};
-        glitch_generator glitchGen2{"glitchGen2"};
+    i2c_master_model i2cMasterModel{"i2c_maslter_model"};
+    i2c_to_wb_top i2cWbTop{"i2cWbTop"};
+    wb_slave_model wbSlaveModel{"wbSlaveModel"};
+    glitch_generator glitchGen1{"glitchGen1"};
+    glitch_generator glitchGen2{"glitchGen2"};
 
     SC_CTOR(tb_dut)
     {
@@ -147,7 +147,7 @@ SC_MODULE(tb_dut)
         sc_trace(tf, this->tb_clk, str+".tb_clk");
         sc_trace(tf, this->tb_rst, str+".tb_rst");
         i2cMasterModel.tracing(tf);
-        //i2cWbTop.tracing(tf);
+        i2cWbTop.tracing(tf);
         wbSlaveModel.tracing(tf);
         glitchGen1.tracing(tf);
         glitchGen2.tracing(tf);
