@@ -58,6 +58,12 @@ void i2c_to_wb_top::assigns()
     i2c_clk_out.write(1);
     i2c_clk_oe.write(0);
 
+    // Transformation variables
+    t_i2c_r_w_bit = static_cast<bool>(i2c_data_in_r[0]);
+    t_serial_out = static_cast<bool>(i2c_data_in_r[8]);
+    t_i2c_8bit_data_in_r = i2c_data_in_r.range(7,0);
+    t_i2c_8bv_data_in_r = static_cast<sc_bv<8> >(t_i2c_8bit_data_in_r);
+
     i2c_r_w_bit.write(t_i2c_r_w_bit);
     serial_out.write(t_serial_out);
     i2c_8uint_data_in_r.write(t_i2c_8bit_data_in_r);

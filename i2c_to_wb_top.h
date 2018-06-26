@@ -42,10 +42,10 @@ SC_MODULE (i2c_to_wb_top)
     sc_uint<9> i2c_data_in_r;
 
     // Transformation variables
-    bool t_i2c_r_w_bit = static_cast<bool>(i2c_data_in_r[0]);
-    bool t_serial_out = static_cast<bool>(i2c_data_in_r[8]);
-    sc_uint<8> t_i2c_8bit_data_in_r = i2c_data_in_r.range(7,0);
-    sc_bv<8> t_i2c_8bv_data_in_r = static_cast<sc_bv<8> >(t_i2c_8bit_data_in_r);
+    bool t_i2c_r_w_bit;
+    bool t_serial_out;
+    sc_uint<8> t_i2c_8bit_data_in_r;
+    sc_bv<8> t_i2c_8bv_data_in_r;
     // Intenal TOP signal to Modules
     sc_signal<bool> i2c_r_w_bit;                    // bit[0] de i2c_data_in_r   (en <sc_bool>)
     sc_signal<bool> serial_out;                     // bit[8] de i2c_data_in_r   (en <sc_bool>)
@@ -115,8 +115,8 @@ SC_MODULE (i2c_to_wb_top)
 
         // -------------------------------------> Glitch Filter 
         // Connect Inputs
-        i_gf_i2c_data_in.clk (wb_clk_i);
-        i_gf_i2c_data_in.in  (i2c_data_in);
+        i_gf_i2c_data_in.clk(wb_clk_i);
+        i_gf_i2c_data_in.in(i2c_data_in);
         // Connect Outputs
         i_gf_i2c_data_in.out (gf_i2c_data_in);
         i_gf_i2c_data_in.rise(gf_i2c_data_in_rise);
@@ -124,8 +124,8 @@ SC_MODULE (i2c_to_wb_top)
 
         // -------------------------------------> Glitch Filter
         // Connect Inputs
-        i_gf_i2c_clk_in.clk (wb_clk_i);
-        i_gf_i2c_clk_in.in  (i2c_clk_in);
+        i_gf_i2c_clk_in.clk(wb_clk_i);
+        i_gf_i2c_clk_in.in(i2c_clk_in);
         // Connect Outputs
         i_gf_i2c_clk_in.out (gf_i2c_clk_in);
         i_gf_i2c_clk_in.rise(gf_i2c_clk_in_rise);
