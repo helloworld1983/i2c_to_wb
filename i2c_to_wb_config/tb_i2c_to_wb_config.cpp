@@ -36,6 +36,10 @@ int sc_main(int argc, char* argv[])
 	sc_trace(wf, wb_clk_i, "wb_clk_i");
 	sc_trace(wf, wb_rst_i, "wb_rst_i");
 
+
+	// Dump Internal module signals
+	config.tracing(wf);
+
 	// tip addr ack is false, so output should be low always
 	tip_addr_ack = false;
 	wb_rst_i = false;
@@ -66,48 +70,12 @@ void test_value(sc_signal<sc_uint<8>> *byte)
 	(*byte) = 0x01;
 	sc_start(10, SC_NS);
 
-	//(*byte) = "0000000X";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "0000000Z";
-	//sc_start(10, SC_NS);
-
 	(*byte) = 0xF0;
 	sc_start(10, SC_NS);
 
 	(*byte) = 0xF1;
 	sc_start(10, SC_NS);
 
-	//(*byte) = "1111000X";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "1111000Z";
-	//sc_start(10, SC_NS);
-
 	(*byte) = 0xFF;
 	sc_start(10, SC_NS);
-
-	//(*byte) = "XXXXXXXX";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "ZZZZZZZZ";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "XXXX0000";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "0000XXXX";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "XXXX1111";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "1111XXXX";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "XXXXZZZZ";
-	//sc_start(10, SC_NS);
-
-	//(*byte) = "ZZZZXXXX";
-	//sc_start(10, SC_NS);
 }

@@ -7,14 +7,6 @@ void i2c_to_wb_config::process(void)
 	bool i2c_addr_ack_out_r;
 	std::string	tmp_byte;
 
-	//tmp_byte = i2c_byte_in.read().to_string();
-	//std::cout << "Value received: " << tmp_byte << "\n";
-
-	std::cout << "Value received: " << i2c_byte_in << "\n";
-
-	//if ((tmp_byte.compare("11110000") == 0) ||
-	//    (tmp_byte.compare("11110001") == 0)) {
-
 	if ((i2c_byte_in.read() == 0xF0) || 
 	    (i2c_byte_in.read() == 0xF1))
 	{
@@ -28,3 +20,15 @@ void i2c_to_wb_config::process(void)
 	i2c_ack_out.write( tip_addr_ack ? i2c_addr_ack_out_r : false );
 }
 
+void i2c_to_wb_config::tracing(sc_trace_file *tf)
+{
+	cout << "[VCD]" << "Add I2C to WB Config Signals to .VCD\n" << endl;
+	const std::string str = this->name();
+
+	// Dump local signals
+	sc_trace(tf, this->i2c_byte_in, str+".i2c_byte_in");
+	sc_trace(tf, this->tip_addr_ack, str+".tip_addr_ack");
+	sc_trace(tf, this->i2c_ack_out, str+".i2c_ack_out");
+	sc_trace(tf, this->wb_clk_i, str+".wb_clk_i");
+	sc_trace(tf, this->wb_rst_i, str+".wb_rst_i");
+}
