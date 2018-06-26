@@ -76,9 +76,11 @@ void i2c_to_wb_top::assigns()
 
 - Description       Algo hara ...
 */
-void tracing(sc_trace_file *tf)
+void i2c_to_wb_top::tracing(sc_trace_file *tf)
 {
     cout << "INVOKED - " << "tracing i2c TOP" << endl;
+    const std::string str = this->name();
+
     // Dump local signals
     sc_trace(tf, this->i2c_data_in, str+".i2c_data_in");
     sc_trace(tf, this->i2c_clk_in, str+".i2c_clk_in");
