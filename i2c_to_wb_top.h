@@ -94,6 +94,7 @@ SC_MODULE (i2c_to_wb_top)
     void i2cDataShiftRegister();
     void i2cDataOutOfSync();
     void assigns();
+    void tracing(sc_trace_file *tf);
 
     // Constructor
     SC_CTOR(i2c_to_wb_top)

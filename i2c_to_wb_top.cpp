@@ -69,3 +69,43 @@ void i2c_to_wb_top::assigns()
     i2c_8uint_data_in_r.write(t_i2c_8bit_data_in_r);
     i2c_8bv_data_in_r.write(t_i2c_8bit_data_in_r);
 }
+
+/*
+- Function          tracing
+- Sensitivity List  *
+
+- Description       Algo hara ...
+*/
+void tracing(sc_trace_file *tf)
+{
+    cout << "INVOKED - " << "tracing i2c TOP" << endl;
+    // Dump local signals
+    sc_trace(tf, this->i2c_data_in, str+".i2c_data_in");
+    sc_trace(tf, this->i2c_clk_in, str+".i2c_clk_in");
+    sc_trace(tf, this->i2c_data_out, str+".i2c_data_out");
+    sc_trace(tf, this->i2c_clk_out, str+".i2c_clk_out");
+    sc_trace(tf, this->i2c_data_oe, str+".i2c_data_oe");
+    sc_trace(tf, this->i2c_clk_oe, str+".i2c_clk_oe");
+
+    sc_trace(tf, this->wb_data_i, str+".wb_data_i");
+    sc_trace(tf, this->wb_data_o, str+".wb_data_o");
+    sc_trace(tf, this->wb_addr_o, str+".wb_addr_o");
+    sc_trace(tf, this->wb_sel_o, str+".wb_sel_o");
+
+    sc_trace(tf, this->wb_we_o, str+".wb_we_o");
+    sc_trace(tf, this->wb_cyc_o, str+".wb_cyc_o");
+    sc_trace(tf, this->wb_stb_o, str+".wb_stb_o");
+    sc_trace(tf, this->wb_ack_i, str+".wb_ack_i");
+    sc_trace(tf, this->wb_err_i, str+".wb_err_i");
+    sc_trace(tf, this->wb_rty_i, str+".wb_rty_i");
+
+    sc_trace(tf, this->wb_clk_i, str+".wb_clk_i");
+    sc_trace(tf, this->wb_rst_i, str+".wb_rst_i");
+
+    // Dump Internal Modules Signals
+    i_gf_i2c_data_in.tracing(tf);
+    i_gf_i2c_clk_in.tracing(tf);
+    //i_i2c_to_wb_fsm.tracing(tf);
+    //i_i2c_to_wb_config.tracing(tf);
+    i_i2c_to_wb_if.tracing(tf);
+}
