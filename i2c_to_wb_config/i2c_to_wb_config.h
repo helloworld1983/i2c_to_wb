@@ -3,13 +3,14 @@
 SC_MODULE(i2c_to_wb_config)
 {
 	sc_in < sc_uint<8> >	i2c_byte_in;
-	sc_in <bool>			tip_addr_ack;
-	sc_out <bool>			i2c_ack_out;
+	sc_in <bool>		tip_addr_ack;
+	sc_out <bool>		i2c_ack_out;
 
-	sc_in_clk				wb_clk_i;
-	sc_in<bool>				wb_rst_i;
+	sc_in_clk		wb_clk_i;
+	sc_in<bool>		wb_rst_i;
 
-	void process( void );
+	void process(void);
+	void tracing(sc_trace_file *tf);
 
 	SC_CTOR(i2c_to_wb_config)
 	{
