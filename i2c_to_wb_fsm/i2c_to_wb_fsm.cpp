@@ -318,3 +318,19 @@ void i2c_to_wb_fsm::stateDeco()
         }                                                         
     }  
 }
+
+
+// debug function, dump internal signals
+void i2c_to_wb_fsm::tracing(sc_trace_file *tf)
+{
+    const std::string str = this->name();
+
+    // Dump local signals
+    sc_trace(tf, this->start_detected, str+".start_detected");
+    sc_trace(tf, this->stop_detected, str+".stop_detected");
+    sc_trace(tf, this->tip_ack, str+".tip_ack");
+    sc_trace(tf, this->xmt_byte_done, str+".xmt_byte_done");
+    sc_trace(tf, this->state, str+".state");
+    sc_trace(tf, this->next_state, str+".next_state");
+    sc_trace(tf, this->bit_count, str+".bit_count");    
+}

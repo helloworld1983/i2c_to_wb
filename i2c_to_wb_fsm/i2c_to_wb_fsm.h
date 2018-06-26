@@ -6,6 +6,7 @@
 #ifndef I2C_TO_WB_FSM_H
 #define I2C_TO_WB_FSM_H
 
+
 #include <systemc.h>
 #include <stdlib.h>
 
@@ -78,6 +79,7 @@ SC_MODULE(i2c_to_wb_fsm)
     void tipWrAck();
     void tipRdAck();
     void i2cError();
+    void tracing(sc_trace_file *tf);
 
     // constructor
     SC_CTOR(i2c_to_wb_fsm)
