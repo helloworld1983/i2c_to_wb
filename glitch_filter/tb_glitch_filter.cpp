@@ -1,5 +1,5 @@
 #include "systemc.h"
-#include "glitch_filter.cpp"
+#include "glitch_filter.h"
 
 int sc_main (int argc, char* argv[]) 
 {

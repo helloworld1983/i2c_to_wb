@@ -10,9 +10,9 @@ CXX=g++
 OUT_FILES=*.o *.out *.vcd
 
 all: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
-	tb_top.cpp i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o
+	tb_top.cpp i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o glitch_filter.o
 	$(CXX) $(CXXFLAGS) tb_top.cpp tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
-	i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o -o i2c_to_wb.out $(LDLIBS) 
+	i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o glitch_filter.o -o i2c_to_wb.out $(LDLIBS) 
 
 run:
 	./i2c_to_wb.out
@@ -46,8 +46,8 @@ test_glitch_filter: glitch_filter.o
 	$(CXX) $(CXXFLAGS) tb_glitch_filter.cpp glitch_filter.o -o glitch_filter.out $(LDLIBS) 
 	./glitch_filter.out
 	gtkwave -a glitch_filter_config.gtkw ./glitch_filter.vcd
-glitch_filter.o: glitch_filter.cpp
-	$(CXX) $(CXXFLAGS) -c glitch_filter.cpp $(LDLIBS)
+glitch_filter.o: glitch_filter/glitch_filter.cpp
+	$(CXX) $(CXXFLAGS) -c glitch_filter/glitch_filter.cpp $(LDLIBS)
 
 test_fsm:i2c_to_wb_fsm/tb_i2c_to_wb_fsm.cpp i2c_to_wb_fsm.o
 	$(CXX) $(CXXFLAGS) i2c_to_wb_fsm/tb_i2c_to_wb_fsm.cpp i2c_to_wb_fsm.o -o fsm.out $(LDLIBS)
@@ -71,9 +71,9 @@ i2c_to_wb_config.o: i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_t
 	$(CXX) $(CXXFLAGS) -c i2c_to_wb_config/i2c_to_wb_config.cpp i2c_to_wb_config/i2c_to_wb_config.h $(LDLIBS)
 
 test_top: tb_i2c_to_wb_top.cpp i2c_to_wb_top.o i2c_to_wb_fsm.o i2c_to_wb_config.o \
-	i2c_to_wb_if.o
+	i2c_to_wb_if.o glitch_filter.o
 	$(CXX) $(CXXFLAGS) tb_i2c_to_wb_top.cpp i2c_to_wb_top.o i2c_to_wb_fsm.o \
-	i2c_to_wb_config.o i2c_to_wb_if.o -o i2c_to_wb_top.out $(LDLIBS)
+	i2c_to_wb_config.o i2c_to_wb_if.o glitch_filter.o -o i2c_to_wb_top.out $(LDLIBS)
 	./i2c_to_wb_top.out
 	gtkwave i2c_to_wb_top.vcd
 i2c_to_wb_top.o: i2c_to_wb_top.cpp i2c_to_wb_top.h

@@ -1,6 +1,6 @@
 #include "systemc.h"
 #include "./i2c_to_wb_fsm/i2c_to_wb_fsm.h"
-#include "./glitch_filter/glitch_filter.cpp"
+#include "./glitch_filter/glitch_filter.h"
 #include "./i2c_to_wb_config/i2c_to_wb_config.h"
 #include "./i2c_to_wb_if/i2c_to_wb_if.h"
 
