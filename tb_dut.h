@@ -54,6 +54,12 @@ SC_MODULE(tb_dut)
     sc_signal<bool>             wb_ack_i;
     sc_signal<bool>             wb_err_i;
     sc_signal<bool>             wb_rty_i;
+ 
+        i2c_master_model i2cMasterModel{"i2c_maslter_model"};
+        i2c_to_wb_top i2cWbTop{"i2cWbTop"};
+        wb_slave_model wbSlaveModel{"wbSlaveModel"};
+        glitch_generator glitchGen1{"glitchGen1"};
+        glitch_generator glitchGen2{"glitchGen2"};
 
     SC_CTOR(tb_dut)
     {
@@ -62,7 +68,7 @@ SC_MODULE(tb_dut)
             sensitive << i2c_data;
 
         // i2c_master_model
-        i2c_master_model i2cMasterModel("i2c_master_model");
+        
         i2cMasterModel.i2c_clk(i2c_clk_b);
         i2cMasterModel.i2c_data(i2c_data_b);
         i2cMasterModel.task_write_byte_arg(task_write_byte_arg);
@@ -73,7 +79,7 @@ SC_MODULE(tb_dut)
         i2cMasterModel.task_stop_trigger(task_stop_trigger);
 
         // i2c_wb_top
-        i2c_to_wb_top i2cWbTop("i2cWbTop");
+        
         i2cWbTop.i2c_data_in(i2c_data_in);
         i2cWbTop.i2c_clk_in(i2c_clk_in);
         i2cWbTop.i2c_data_out(i2c_data_out);
@@ -95,7 +101,7 @@ SC_MODULE(tb_dut)
 
 
         // i2c_wb_slave
-        wb_slave_model wbSlaveModel("wbSlaveModel");
+        
         wbSlaveModel.clk_i(tb_clk);
         wbSlaveModel.rst_i(tb_rst);
         wbSlaveModel.dat_o(wb_data_i);
@@ -109,11 +115,8 @@ SC_MODULE(tb_dut)
         wbSlaveModel.err_o(wb_err_i);
         wbSlaveModel.rty_o(wb_rty_i);
 
-        // glitch_generator
-        glitch_generator glitchGen1("glitchGen1");
+        // glitch_generator        
         glitchGen1.glitch(i2c_clk);
-
-        glitch_generator glitchGen2("glitchGen2");
         glitchGen2.glitch(i2c_data);
     }
 
@@ -143,6 +146,12 @@ SC_MODULE(tb_dut)
         // Dump local signals
         sc_trace(tf, this->tb_clk, str+".tb_clk");
         sc_trace(tf, this->tb_rst, str+".tb_rst");
+        i2cMasterModel.tracing(tf);
+        //i2cWbTop.tracing(tf);
+        wbSlaveModel.tracing(tf);
+        glitchGen1.tracing(tf);
+        glitchGen2.tracing(tf);
+
     }
 
 }; // end class tb_dut
