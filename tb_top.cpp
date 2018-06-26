@@ -24,7 +24,7 @@ int sc_main (int, char *[])
     
     sc_start(100,SC_NS); 
 
-    dut.i2cMasterModel.start();
+    //dut.i2cMasterModel.start();
     // dut.i2cMasterModel.write_byte(241); //f1
     // dut.i2cMasterModel.read_byte(0);
     // dut.i2cMasterModel.read_byte(0);

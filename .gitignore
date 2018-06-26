@@ -5,3 +5,12 @@ Model/i2c_master_model.h.gch
 i2c_to_wb_config/i2c_to_wb_config.h.gch
 i2c_to_wb_if/i2c_to_wb_if.h.gch
 Model/glitch_generator.h.gch
+i2c_to_wb_fsm.o
+glitch_generator.o
+i2c_master_model.o
+i2c_to_wb.out
+i2c_to_wb_config.o
+i2c_to_wb_if.o
+i2c_to_wb_top.o
+tb_top.vcd
+wb_slave_model.o
