@@ -1,0 +1,7 @@
+Model/wb_slave_model.h.gch
+i2c_to_wb_top.h.gch
+Model/glitch_generator.h.gch
+Model/i2c_master_model.h.gch
+i2c_to_wb_config/i2c_to_wb_config.h.gch
+i2c_to_wb_if/i2c_to_wb_if.h.gch
+Model/glitch_generator.h.gch
