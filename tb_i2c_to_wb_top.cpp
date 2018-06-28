@@ -4,8 +4,8 @@
 int sc_main (int argc, char* argv[]) 
 { 
   // -------------------------------------------> Define Ports
-  //sc_signal<bool>         i2c_data_in;
-  sc_clock i2c_data_in("i2c_data_in", 20, SC_NS, 0.5);
+  sc_signal<bool>         i2c_data_in;
+  //sc_clock i2c_data_in("i2c_data_in", 20, SC_NS, 0.5);
   sc_clock i2c_clk_in("i2c_clk_in", 20, SC_NS, 0.5);
   sc_signal<bool>         i2c_data_out;
   sc_signal<bool>         i2c_clk_out;
@@ -85,25 +85,35 @@ int sc_main (int argc, char* argv[])
   //sc_clock wb_clk_i("wb_clk_i", 2, SC_NS, 0.5);
 
   // Initial State;
-  //i2c_data_in = 0;                                    
+  //i2c_data_in = 0;   
+  //state =01                                 
   wb_data_i = "00000000000000000000000000000001";                            
   wb_ack_i = 0;                           
   wb_err_i = 0;                     
   wb_rty_i = 0;                                                
-  wb_rst_i = 1;                        
-  sc_start(10,SC_NS);
+  wb_rst_i = 1;                      
+  i2c_data_in = 1;  
+  sc_start(100,SC_NS);
   
   // Inputs Change;
-  //i2c_data_in = 1;   
-  wb_data_i = "00000000000000000000000000000001"; 
-  wb_ack_i = 0;                           
-  wb_err_i = 0;                     
-  wb_rty_i = 0;    
-  wb_rst_i = 0;                        
-  sc_start(10,SC_NS);
-
+  //i2c_data_in = 1;  
+  // state=02   
+  wb_rst_i = 0;                       
+  sc_start(28,SC_NS);
+i2c_data_in = 0 ; 
+sc_start(28,SC_NS);
+i2c_data_in = 1 ; 
+sc_start(28,SC_NS);
+i2c_data_in = 0 ;                       
+  sc_start(100,SC_NS);
   
-  sc_start(1000,SC_NS);
+//i2c_data_in = 1;  
+  // state=03
+ 
+  i2c_data_in = 1 ;                        
+  sc_start(100,SC_NS);
+
+  //sc_start(1000,SC_NS);
   
   cout << "@" << sc_time_stamp() <<" Terminating simulation\n" << endl;
   sc_close_vcd_trace_file(tf);
