@@ -325,6 +325,18 @@ void i2c_to_wb_fsm::tracing(sc_trace_file *tf)
 {
     const std::string str = this->name();
 
+    // Dump input signals
+    sc_trace(tf, this->i2c_data, str+".i2c_data");
+    sc_trace(tf, this->i2c_data_rise, str+".i2c_data_rise");
+    sc_trace(tf, this->i2c_data_fall, str+".i2c_data_fall");
+    sc_trace(tf, this->i2c_clk, str+".i2c_clk");
+    sc_trace(tf, this->i2c_clk_rise, str+".i2c_clk_rise");
+    sc_trace(tf, this->i2c_clk_fall, str+".next_state");
+    sc_trace(tf, this->i2c_r_w_bit, str+".i2c_r_w_bit");  
+    sc_trace(tf, this->i2c_ack_out, str+".i2c_ack_out");
+    sc_trace(tf, this->wb_clk_i, str+".wb_clk_i");
+    sc_trace(tf, this->wb_rst_i, str+".wb_rst_i");
+
     // Dump local signals
     sc_trace(tf, this->start_detected, str+".start_detected");
     sc_trace(tf, this->stop_detected, str+".stop_detected");
@@ -332,5 +344,16 @@ void i2c_to_wb_fsm::tracing(sc_trace_file *tf)
     sc_trace(tf, this->xmt_byte_done, str+".xmt_byte_done");
     sc_trace(tf, this->state, str+".state");
     sc_trace(tf, this->next_state, str+".next_state");
-    sc_trace(tf, this->bit_count, str+".bit_count");    
+    sc_trace(tf, this->bit_count, str+".bit_count");
+
+    // Dump output signals
+    sc_trace(tf, this->i2c_ack_done, str+".i2c_ack_done");
+    sc_trace(tf, this->tip_addr_byte, str+".tip_addr_byte");
+    sc_trace(tf, this->tip_read_byte, str+".tip_read_byte");
+    sc_trace(tf, this->tip_write_byte, str+".tip_write_byte");
+    sc_trace(tf, this->tip_wr_ack, str+".tip_wr_ack");
+    sc_trace(tf, this->tip_rd_ack, str+".tip_rd_ack");
+    sc_trace(tf, this->tip_addr_ack, str+".tip_addr_ack");  
+    sc_trace(tf, this->i2c_error, str+".i2c_error");
+    sc_trace(tf, this->state_out, str+".state_out");       
 }

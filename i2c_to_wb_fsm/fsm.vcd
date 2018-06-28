@@ -1,5 +1,5 @@
 $date
-     Jun 25, 2018       19:55:28
+     Jun 28, 2018       09:44:48
 $end
 
 $version
@@ -11,25 +11,6 @@ $timescale
 $end
 
 $scope module SystemC $end
-$var wire    1  aaaah  i2c_data_rise       $end
-$var wire    1  aaaai  i2c_data_fall       $end
-$var wire    1  aaaaj  i2c_clk       $end
-$var wire    1  aaaak  wb_rst_i       $end
-$var wire    1  aaaal  wb_clk_i       $end
-$var wire    8  aaaam  state_out [7:0]  $end
-$var wire    1  aaaan  i2c_clk_fall       $end
-$var wire    1  aaaao  i2c_clk_rise       $end
-$var wire    1  aaaap  i2c_ack_done       $end
-$var wire    1  aaaaq  i2c_ack_out       $end
-$var wire    1  aaaar  i2c_data       $end
-$var wire    1  aaaas  i2c_r_w_bit       $end
-$var wire    1  aaaat  tip_addr_ack       $end
-$var wire    1  aaaau  tip_addr_byte       $end
-$var wire    1  aaaav  tip_read_byte       $end
-$var wire    1  aaaaw  tip_write_byte       $end
-$var wire    1  aaaax  tip_wr_ack       $end
-$var wire    1  aaaay  tip_rd_ack       $end
-$var wire    1  aaaaz  i2c_error       $end
 $scope module I2C $end
 $var wire    1  aaaaa  start_detected       $end
 $var wire    1  aaaab  stop_detected       $end
@@ -38,6 +19,25 @@ $var wire    1  aaaad  xmt_byte_done       $end
 $var wire   32  aaaae  state [31:0]  $end
 $var wire   32  aaaaf  next_state [31:0]  $end
 $var wire    4  aaaag  bit_count [3:0]  $end
+$var wire    8  aaaah  state_out [7:0]  $end
+$var wire    1  aaaai  i2c_error       $end
+$var wire    1  aaaaj  tip_addr_ack       $end
+$var wire    1  aaaak  tip_rd_ack       $end
+$var wire    1  aaaal  tip_wr_ack       $end
+$var wire    1  aaaam  tip_write_byte       $end
+$var wire    1  aaaan  tip_read_byte       $end
+$var wire    1  aaaao  tip_addr_byte       $end
+$var wire    1  aaaap  i2c_ack_done       $end
+$var wire    1  aaaaq  wb_rst_i       $end
+$var wire    1  aaaar  wb_clk_i       $end
+$var wire    1  aaaas  i2c_ack_out       $end
+$var wire    1  aaaat  i2c_r_w_bit       $end
+$var wire    1  aaaau  next_state       $end
+$var wire    1  aaaav  i2c_clk_rise       $end
+$var wire    1  aaaaw  i2c_clk       $end
+$var wire    1  aaaax  i2c_data_fall       $end
+$var wire    1  aaaay  i2c_data_rise       $end
+$var wire    1  aaaaz  i2c_data       $end
 $upscope $end
 $upscope $end
 $enddefinitions  $end
@@ -54,17 +54,17 @@ $dumpvars
 b0 aaaae
 b0 aaaaf
 b0 aaaag
-0aaaah
+b1 aaaah
 0aaaai
-1aaaaj
-1aaaak
-1aaaal
-b1 aaaam
+0aaaaj
+0aaaak
+0aaaal
+0aaaam
 0aaaan
 0aaaao
 0aaaap
 0aaaaq
-0aaaar
+1aaaar
 0aaaas
 0aaaat
 0aaaau
@@ -76,580 +76,555 @@ b1 aaaam
 $end
 
 #1
-0aaaal
+0aaaar
 
 #2
-b100 aaaag
-1aaaal
+1aaaar
 
 #3
-0aaaal
+0aaaar
 
 #4
-1aaaal
+1aaaar
 
 #5
-0aaaal
+0aaaar
 
 #6
-1aaaal
+1aaaar
 
 #7
-0aaaal
+0aaaar
 
 #8
-1aaaal
+1aaaar
 
 #9
-0aaaal
+0aaaar
 
 #10
-1aaaaa
-1aaaai
-0aaaak
-1aaaal
-
-#11
-0aaaal
-
-#12
-1aaaal
-b10 aaaam
-1aaaau
-1aaaaw
-
-#13
-0aaaal
-
-#14
-1aaaal
-
-#15
-0aaaal
-
-#16
-1aaaal
-
-#17
-0aaaal
-
-#18
-1aaaal
-
-#19
-0aaaal
-
-#20
-1aaaal
-
-#21
-0aaaal
-
-#22
-1aaaal
-
-#23
-0aaaal
-
-#24
-1aaaal
-
-#25
-0aaaal
-
-#26
-1aaaal
-
-#27
-0aaaal
-
-#28
-1aaaal
-
-#29
-0aaaal
-
-#30
-1aaaal
-
-#31
-0aaaal
-
-#32
-1aaaal
-
-#33
-0aaaal
-
-#34
-1aaaal
-
-#35
-0aaaal
-
-#36
-1aaaal
-
-#37
-0aaaal
-
-#38
-1aaaal
-
-#39
-0aaaal
-
-#40
-0aaaaa
-0aaaai
-1aaaal
-1aaaao
-
-#41
-0aaaal
-
-#42
-1aaaal
-
-#43
-0aaaal
-
-#44
-1aaaal
-
-#45
-0aaaal
-
-#46
-1aaaal
-
-#47
-0aaaal
-
-#48
-1aaaal
-
-#49
-0aaaal
-
-#50
-1aaaal
-
-#51
-0aaaal
-
-#52
-1aaaal
-
-#53
-0aaaal
-
-#54
-1aaaal
-
-#55
-0aaaal
-
-#56
-1aaaal
-
-#57
-0aaaal
-
-#58
-1aaaal
-
-#59
-0aaaal
-
-#60
-1aaaal
-
-#61
-0aaaal
-
-#62
-1aaaal
-
-#63
-0aaaal
-
-#64
-1aaaal
-
-#65
-0aaaal
-
-#66
-1aaaal
-
-#67
-0aaaal
-
-#68
-1aaaal
-
-#69
-0aaaal
-
-#70
-b101 aaaag
-1aaaal
-1aaaan
-
-#71
-0aaaal
-
-#72
-b110 aaaag
-1aaaal
-
-#73
-0aaaal
-
-#74
-1aaaad
-b111 aaaag
-1aaaal
-
-#75
-0aaaal
-
-#76
-0aaaad
-b1000 aaaag
-1aaaal
-b100 aaaam
-1aaaat
-0aaaau
-0aaaaw
+1aaaar
 1aaaax
 
+#11
+0aaaar
+
+#12
+1aaaar
+
+#13
+0aaaar
+
+#14
+1aaaar
+
+#15
+0aaaar
+
+#16
+1aaaar
+
+#17
+0aaaar
+
+#18
+1aaaar
+
+#19
+0aaaar
+
+#20
+1aaaar
+
+#21
+0aaaar
+
+#22
+1aaaar
+
+#23
+0aaaar
+
+#24
+1aaaar
+
+#25
+0aaaar
+
+#26
+1aaaar
+
+#27
+0aaaar
+
+#28
+1aaaar
+
+#29
+0aaaar
+
+#30
+1aaaar
+
+#31
+0aaaar
+
+#32
+1aaaar
+
+#33
+0aaaar
+
+#34
+1aaaar
+
+#35
+0aaaar
+
+#36
+1aaaar
+
+#37
+0aaaar
+
+#38
+1aaaar
+
+#39
+0aaaar
+
+#40
+1aaaar
+1aaaav
+0aaaax
+
+#41
+0aaaar
+
+#42
+1aaaar
+
+#43
+0aaaar
+
+#44
+1aaaar
+
+#45
+0aaaar
+
+#46
+1aaaar
+
+#47
+0aaaar
+
+#48
+1aaaar
+
+#49
+0aaaar
+
+#50
+1aaaar
+
+#51
+0aaaar
+
+#52
+1aaaar
+
+#53
+0aaaar
+
+#54
+1aaaar
+
+#55
+0aaaar
+
+#56
+1aaaar
+
+#57
+0aaaar
+
+#58
+1aaaar
+
+#59
+0aaaar
+
+#60
+1aaaar
+
+#61
+0aaaar
+
+#62
+1aaaar
+
+#63
+0aaaar
+
+#64
+1aaaar
+
+#65
+0aaaar
+
+#66
+1aaaar
+
+#67
+0aaaar
+
+#68
+1aaaar
+
+#69
+0aaaar
+
+#70
+b1 aaaag
+1aaaar
+1aaaau
+
+#71
+0aaaar
+
+#72
+b10 aaaag
+1aaaar
+
+#73
+0aaaar
+
+#74
+b11 aaaag
+1aaaar
+
+#75
+0aaaar
+
+#76
+b100 aaaag
+1aaaar
+
 #77
-0aaaal
+0aaaar
 
 #78
-b1001 aaaag
-1aaaal
+b101 aaaag
+1aaaar
 
 #79
-0aaaal
+0aaaar
 
 #80
-b1010 aaaag
-1aaaal
+b110 aaaag
+1aaaar
 
 #81
-0aaaal
+0aaaar
 
 #82
-b1011 aaaag
-1aaaal
+1aaaad
+b111 aaaag
+1aaaar
 
 #83
-0aaaal
+0aaaar
 
 #84
-b1100 aaaag
-1aaaal
+0aaaad
+b1000 aaaag
+1aaaar
 
 #85
-0aaaal
+0aaaar
 
 #86
-b1101 aaaag
-1aaaal
+b1001 aaaag
+1aaaar
 
 #87
-0aaaal
+0aaaar
 
 #88
-b1110 aaaag
-1aaaal
+b1010 aaaag
+1aaaar
 
 #89
-0aaaal
+0aaaar
 
 #90
 b100 aaaag
-1aaaal
 1aaaap
+1aaaar
 
 #91
-0aaaal
+0aaaar
 
 #92
-1aaaal
-b1000 aaaam
-0aaaat
-1aaaaw
-0aaaax
+1aaaar
 
 #93
-0aaaal
+0aaaar
 
 #94
-1aaaal
+1aaaar
 
 #95
-0aaaal
+0aaaar
 
 #96
-1aaaal
+1aaaar
 
 #97
-0aaaal
+0aaaar
 
 #98
-1aaaal
+1aaaar
 
 #99
-0aaaal
+0aaaar
 
 #100
-1aaaal
+1aaaar
 
 #101
-0aaaal
+0aaaar
 
 #102
-1aaaal
+1aaaar
 
 #103
-0aaaal
+0aaaar
 
 #104
-1aaaal
+1aaaar
 
 #105
-0aaaal
+0aaaar
 
 #106
-1aaaal
+1aaaar
 
 #107
-0aaaal
+0aaaar
 
 #108
-1aaaal
+1aaaar
 
 #109
-0aaaal
+0aaaar
 
 #110
 b101 aaaag
-1aaaal
 0aaaap
+1aaaar
 
 #111
-0aaaal
+0aaaar
 
 #112
 b110 aaaag
-1aaaal
+1aaaar
 
 #113
-0aaaal
+0aaaar
 
 #114
 1aaaad
 b111 aaaag
-1aaaal
+1aaaar
 
 #115
-0aaaal
+0aaaar
 
 #116
 0aaaad
 b1000 aaaag
-1aaaal
-b10000 aaaam
-0aaaaw
-1aaaax
+1aaaar
 
 #117
-0aaaal
+0aaaar
 
 #118
 b1001 aaaag
-1aaaal
+1aaaar
 
 #119
-0aaaal
+0aaaar
 
 #120
 b1010 aaaag
-1aaaal
+1aaaar
 
 #121
-0aaaal
+0aaaar
 
 #122
 b1011 aaaag
-1aaaal
+1aaaar
 
 #123
-0aaaal
+0aaaar
 
 #124
 b1100 aaaag
-1aaaal
+1aaaar
 
 #125
-0aaaal
+0aaaar
 
 #126
 b1101 aaaag
-1aaaal
+1aaaar
 
 #127
-0aaaal
+0aaaar
 
 #128
 b1110 aaaag
-1aaaal
+1aaaar
 
 #129
-0aaaal
+0aaaar
 
 #130
 b100 aaaag
-1aaaal
 1aaaap
+1aaaar
 
 #131
-0aaaal
+0aaaar
 
 #132
-1aaaal
-b1000 aaaam
-1aaaaw
-0aaaax
+1aaaar
 
 #133
-0aaaal
+0aaaar
 
 #134
-1aaaal
+1aaaar
 
 #135
-0aaaal
+0aaaar
 
 #136
-1aaaal
+1aaaar
 
 #137
-0aaaal
+0aaaar
 
 #138
-1aaaal
+1aaaar
 
 #139
-0aaaal
+0aaaar
 
 #140
-1aaaal
+1aaaar
 
 #141
-0aaaal
+0aaaar
 
 #142
-1aaaal
+1aaaar
 
 #143
-0aaaal
+0aaaar
 
 #144
-1aaaal
+1aaaar
 
 #145
-0aaaal
+0aaaar
 
 #146
-1aaaal
+1aaaar
 
 #147
-0aaaal
+0aaaar
 
 #148
-1aaaal
+1aaaar
 
 #149
-0aaaal
+0aaaar
 
 #150
-1aaaab
-1aaaah
-1aaaal
-0aaaao
 0aaaap
+1aaaar
+0aaaav
+1aaaay
 
 #151
-0aaaal
+0aaaar
 
 #152
 b101 aaaag
-1aaaal
-b1 aaaam
-0aaaaw
+1aaaar
 
 #153
-0aaaal
+0aaaar
 
 #154
 b110 aaaag
-1aaaal
+1aaaar
 
 #155
-0aaaal
+0aaaar
 
 #156
 b111 aaaag
-1aaaal
+1aaaar
 
 #157
-0aaaal
+0aaaar
 
 #158
 b1000 aaaag
-1aaaal
+1aaaar
 
 #159
-0aaaal
+0aaaar
 
 #160
 b1001 aaaag
-1aaaal
+1aaaar
 
 #161
-0aaaal
+0aaaar
 
 #162
 b1010 aaaag
-1aaaal
+1aaaar
 
 #163
-0aaaal
+0aaaar
 
 #164
 b1011 aaaag
-1aaaal
+1aaaar
 
 #165
-0aaaal
+0aaaar
 
 #166
 b1100 aaaag
-1aaaal
+1aaaar
 
 #167
-0aaaal
+0aaaar
 
 #168
 b1101 aaaag
-1aaaal
+1aaaar
 
 #169
-0aaaal
+0aaaar
 
 #170
