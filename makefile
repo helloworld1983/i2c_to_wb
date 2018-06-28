@@ -9,9 +9,9 @@ CXX=g++
 
 OUT_FILES=*.o *.out *.vcd *.h.gch
 
-all: tb_dut.h tb_dut.cpp glitch_generator.o wb_slave_model.o i2c_master_model.o \
+all: tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
 	tb_top.cpp i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o glitch_filter.o
-	$(CXX) $(CXXFLAGS) tb_top.cpp tb_dut.h tb_dut.cpp glitch_generator.o wb_slave_model.o i2c_master_model.o \
+	$(CXX) $(CXXFLAGS) tb_top.cpp tb_dut.h glitch_generator.o wb_slave_model.o i2c_master_model.o \
 	i2c_to_wb_top.o i2c_to_wb_if.o i2c_to_wb_config.o i2c_to_wb_fsm.o glitch_filter.o -o i2c_to_wb.out $(LDLIBS) 
 
 run:
