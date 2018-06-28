@@ -1,5 +1,5 @@
 $date
-     Jun 28, 2018       09:44:48
+     Jun 28, 2018       16:19:57
 $end
 
 $version
@@ -32,7 +32,7 @@ $var wire    1  aaaaq  wb_rst_i       $end
 $var wire    1  aaaar  wb_clk_i       $end
 $var wire    1  aaaas  i2c_ack_out       $end
 $var wire    1  aaaat  i2c_r_w_bit       $end
-$var wire    1  aaaau  next_state       $end
+$var wire    1  aaaau  i2c_clk_fall       $end
 $var wire    1  aaaav  i2c_clk_rise       $end
 $var wire    1  aaaaw  i2c_clk       $end
 $var wire    1  aaaax  i2c_data_fall       $end
@@ -63,7 +63,7 @@ b1 aaaah
 0aaaan
 0aaaao
 0aaaap
-0aaaaq
+1aaaaq
 1aaaar
 0aaaas
 0aaaat
@@ -79,6 +79,7 @@ $end
 0aaaar
 
 #2
+b100 aaaag
 1aaaar
 
 #3
@@ -103,13 +104,19 @@ $end
 0aaaar
 
 #10
+1aaaaa
+0aaaaq
 1aaaar
+1aaaaw
 1aaaax
 
 #11
 0aaaar
 
 #12
+b10 aaaah
+1aaaam
+1aaaao
 1aaaar
 
 #13
@@ -164,7 +171,10 @@ $end
 0aaaar
 
 #30
+0aaaaa
 1aaaar
+1aaaav
+0aaaax
 
 #31
 0aaaar
@@ -195,8 +205,6 @@ $end
 
 #40
 1aaaar
-1aaaav
-0aaaax
 
 #41
 0aaaar
@@ -226,268 +234,292 @@ $end
 0aaaar
 
 #50
+b101 aaaag
 1aaaar
+1aaaau
 
 #51
 0aaaar
 
 #52
+b110 aaaag
 1aaaar
 
 #53
 0aaaar
 
 #54
+1aaaad
+b111 aaaag
 1aaaar
 
 #55
 0aaaar
 
 #56
+0aaaad
+b1000 aaaag
+b100 aaaah
+1aaaaj
+1aaaal
+0aaaam
+0aaaao
 1aaaar
 
 #57
 0aaaar
 
 #58
+b1001 aaaag
 1aaaar
 
 #59
 0aaaar
 
 #60
+b1010 aaaag
 1aaaar
 
 #61
 0aaaar
 
 #62
+b1011 aaaag
 1aaaar
 
 #63
 0aaaar
 
 #64
+b1100 aaaag
 1aaaar
 
 #65
 0aaaar
 
 #66
+b1101 aaaag
 1aaaar
 
 #67
 0aaaar
 
 #68
+b1110 aaaag
 1aaaar
 
 #69
 0aaaar
 
 #70
-b1 aaaag
+b1111 aaaag
 1aaaar
-1aaaau
 
 #71
 0aaaar
 
 #72
-b10 aaaag
+b0 aaaag
 1aaaar
 
 #73
 0aaaar
 
 #74
-b11 aaaag
+b1 aaaag
 1aaaar
 
 #75
 0aaaar
 
 #76
-b100 aaaag
+b10 aaaag
 1aaaar
 
 #77
 0aaaar
 
 #78
-b101 aaaag
+b11 aaaag
 1aaaar
 
 #79
 0aaaar
 
 #80
-b110 aaaag
+b100 aaaag
 1aaaar
 
 #81
 0aaaar
 
 #82
-1aaaad
-b111 aaaag
+b101 aaaag
 1aaaar
 
 #83
 0aaaar
 
 #84
-0aaaad
-b1000 aaaag
+b110 aaaag
 1aaaar
 
 #85
 0aaaar
 
 #86
-b1001 aaaag
+1aaaad
+b111 aaaag
 1aaaar
 
 #87
 0aaaar
 
 #88
-b1010 aaaag
+0aaaad
+b1000 aaaag
 1aaaar
 
 #89
 0aaaar
 
 #90
-b100 aaaag
-1aaaap
+b1001 aaaag
 1aaaar
 
 #91
 0aaaar
 
 #92
+b1010 aaaag
 1aaaar
 
 #93
 0aaaar
 
 #94
+b1011 aaaag
 1aaaar
 
 #95
 0aaaar
 
 #96
+b1100 aaaag
 1aaaar
 
 #97
 0aaaar
 
 #98
+b1101 aaaag
 1aaaar
 
 #99
 0aaaar
 
 #100
+b1110 aaaag
 1aaaar
 
 #101
 0aaaar
 
 #102
+b1111 aaaag
 1aaaar
 
 #103
 0aaaar
 
 #104
+b0 aaaag
 1aaaar
 
 #105
 0aaaar
 
 #106
+b1 aaaag
 1aaaar
 
 #107
 0aaaar
 
 #108
+b10 aaaag
 1aaaar
 
 #109
 0aaaar
 
 #110
-b101 aaaag
-0aaaap
+b11 aaaag
 1aaaar
 
 #111
 0aaaar
 
 #112
-b110 aaaag
+b100 aaaag
 1aaaar
 
 #113
 0aaaar
 
 #114
-1aaaad
-b111 aaaag
+b101 aaaag
 1aaaar
 
 #115
 0aaaar
 
 #116
-0aaaad
-b1000 aaaag
+b110 aaaag
 1aaaar
 
 #117
 0aaaar
 
 #118
-b1001 aaaag
+1aaaad
+b111 aaaag
 1aaaar
 
 #119
 0aaaar
 
 #120
-b1010 aaaag
+0aaaad
+b1000 aaaag
 1aaaar
 
 #121
 0aaaar
 
 #122
-b1011 aaaag
+b1001 aaaag
 1aaaar
 
 #123
 0aaaar
 
 #124
-b1100 aaaag
+b1010 aaaag
 1aaaar
 
 #125
 0aaaar
 
 #126
-b1101 aaaag
+b1011 aaaag
 1aaaar
 
 #127
 0aaaar
 
 #128
-b1110 aaaag
+b1100 aaaag
 1aaaar
 
 #129
@@ -502,6 +534,10 @@ b100 aaaag
 0aaaar
 
 #132
+b1000 aaaah
+0aaaaj
+0aaaal
+1aaaam
 1aaaar
 
 #133
@@ -556,6 +592,7 @@ b100 aaaag
 0aaaar
 
 #150
+1aaaab
 0aaaap
 1aaaar
 0aaaav
@@ -566,6 +603,8 @@ b100 aaaag
 
 #152
 b101 aaaag
+b1 aaaah
+0aaaam
 1aaaar
 
 #153

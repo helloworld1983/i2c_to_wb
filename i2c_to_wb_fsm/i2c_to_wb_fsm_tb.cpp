@@ -132,59 +132,143 @@ int sc_main (int argc, char* argv[]) {
     // Dump signals
     i2c.tracing(wf);
 
-    // start sim
+    // ***start sim @ 0s
     sc_start(0,SC_NS);
     cout << "@" << sc_time_stamp;
 
     // Initialize all variables
-    /*
-    i2c_data_rise -> [0]
-    i2c_data_fall -> [1]
-    i2c_data      -> [2]
-    i2c_clk_rise  -> [3]
-    i2c_clk_fall  -> [4]
-    i2c_r_w_bit   -> [5]
-    i2c_ack_out   -> [6]
-    wb_rst_i      -> [7]
-    i2c_clk       -> [8]
+    i2c_data_rise = 0;
+    i2c_data_fall = 0;
+    i2c_data = 0;
+    i2c_clk_rise = 0;
+    i2c_clk_fall = 0;
+    i2c_r_w_bit = 0;
+    i2c_ack_out = 0;
+    wb_rst_i = 1;
+    i2c_clk = 0; 
+
+    // expected outputs
+    /* 
+    i2c_ack_done = 0
+    tip_addr_byte = 0
+    tip_read_byte = 0
+    tip_write_byte = 0
+    tip_wr_ack = 0
+    tip_rd_ack = 0
+    tip_addr_ack = 0
+    i2c_error = 0
+    state_out = 00000001 (idle)
     */
 
-    //applyInputSignals(110000000);
-
+    // ***sim @ 10s
     sc_start(10,SC_NS);
 
+    // apply signals
+    i2c_data_rise = 0;
+    i2c_data_fall = 1;      
+    i2c_data = 0;
+    i2c_clk_rise = 0;
+    i2c_clk_fall = 0;
+    i2c_r_w_bit = 0;
+    i2c_ack_out = 0;
     wb_rst_i = 0;
-    i2c_data_fall = 1;  // start_detected=1 -> state=addr_byte -> tip_addr_byte=1
+    i2c_clk = 1;        // start_detected=1
 
-    sc_start(30,SC_NS);
-    //i2c_data_rise = 1;  // stop_detected=1 -> sate=error
-    i2c_data_fall = 0;  // start_detected=0 
-    i2c_clk_rise = 1;  // xmt_byte_done=1 -> state=addr_byte 
+    // expected outputs
+    /* 
+    i2c_ack_done = 0
+    tip_addr_byte = 1
+    tip_read_byte = 0
+    tip_write_byte = 1
+    tip_wr_ack = 0
+    tip_rd_ack = 0
+    tip_addr_ack = 0
+    i2c_error = 0
+    state_out = 00000010 (addr_byte)
+    */
 
-    sc_start(30,SC_NS);
-    i2c_clk_fall=1; // bit_count++ ->state=addr_ack -> tip_addr_ack=1
-
+    // ***sim @ 30s
     sc_start(20,SC_NS);
-    
-    /*// ->Error -> Idle state
-    i2c_ack_out =0;
-    i2c_clk_rise=0;
-    i2c_data_rise = 1;
-    // state=error -> state=idel*/
 
-    /*// state = read
-    i2c_ack_out=0;
-    i2c_ack_done=1;
-    i2c_clk_rise=1;
-    i2c_r_w_bit=1;
-    // -> state = read - > tip_read_byte=1*/
+    // apply signals
+    i2c_data_rise = 0;
+    i2c_data_fall = 0;      
+    i2c_data = 0;
+    i2c_clk_rise = 1;
+    i2c_clk_fall = 0;
+    i2c_r_w_bit = 0;
+    i2c_ack_out = 0;
+    wb_rst_i = 0;
+    i2c_clk = 1;        
 
-    // state = read
-    i2c_ack_out=0;
-    i2c_ack_done=1;
-    i2c_clk_rise=1;
-    i2c_r_w_bit=0;
-    // -> state = write - > tip_write_byte=1
+    // expected outputs
+    /* 
+    i2c_ack_done = 0
+    tip_addr_byte = 0
+    tip_read_byte = 0
+    tip_write_byte = 0
+    tip_wr_ack = 1
+    tip_rd_ack = 0
+    tip_addr_ack = 1
+    i2c_error = 0
+    state_out = 00000100 (addr_ack)
+    */
+
+    // ***sim @ 50ns
+    sc_start(20,SC_NS);
+
+   // apply signals
+    i2c_data_rise = 0;
+    i2c_data_fall = 0;      
+    i2c_data = 0;
+    i2c_clk_rise = 1;
+    i2c_clk_fall = 1;
+    i2c_r_w_bit = 0;
+    i2c_ack_out = 0;
+    wb_rst_i = 0;
+    i2c_clk = 1;        
+
+    // expected outputs
+    /* 
+    i2c_ack_done = 1
+    tip_addr_byte = 0
+    tip_read_byte = 0
+    tip_write_byte = 1
+    tip_wr_ack = 0
+    tip_rd_ack = 0
+    tip_addr_ack = 0
+    i2c_error = 0
+    state_out = 00001000 (write)
+    */
+
+    // ***sim @ 90ns
+    sc_start(40,SC_NS);
+
+   // apply signals
+    /*i2c_data_rise = 0;
+    i2c_data_fall = 1;      
+    i2c_data = 0;
+    i2c_clk_rise = 1;
+    i2c_clk_fall = 1;
+    i2c_r_w_bit = 0;
+    i2c_ack_out = 0;
+    wb_rst_i = 0;
+    i2c_clk = 1; */       
+
+    // expected outputs
+    /* 
+    i2c_ack_done = 1
+    tip_addr_byte = 1
+    tip_read_byte = 0
+    tip_write_byte = 1
+    tip_wr_ack = 0
+    tip_rd_ack = 0
+    tip_addr_ack = 0
+    i2c_error = 0
+    state_out = 00000010 (addr_byte)
+    */    
+
+
 
     sc_start(20,SC_NS);
     

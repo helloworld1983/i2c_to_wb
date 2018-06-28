@@ -1,0 +1,54 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Thu Jun 28 20:40:07 2018
+[*]
+[dumpfile] "/home/parisfe/Maestria/Diseno de alto nivel/i2c_to_wb/i2c_to_wb_fsm/fsm.vcd"
+[dumpfile_mtime] "Thu Jun 28 20:24:16 2018"
+[dumpfile_size] 4486
+[savefile] "/home/parisfe/Maestria/Diseno de alto nivel/i2c_to_wb/i2c_to_wb_fsm/fsm.gtkw"
+[timestart] 0
+[size] 1853 1025
+[pos] -29 -29
+*-5.721859 30 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] SystemC.
+[sst_width] 223
+[signals_width] 213
+[sst_expanded] 1
+[sst_vpaned_height] 307
+@200
+-Inputs
+@28
+SystemC.I2C.i2c_data
+SystemC.I2C.i2c_data_rise
+SystemC.I2C.i2c_data_fall
+SystemC.I2C.i2c_clk
+SystemC.I2C.i2c_clk_rise
+SystemC.I2C.i2c_clk_fall
+SystemC.I2C.i2c_r_w_bit
+SystemC.I2C.i2c_ack_out
+SystemC.I2C.wb_clk_i
+SystemC.I2C.wb_rst_i
+@200
+-Internal
+@22
+SystemC.I2C.bit_count[3:0]
+@28
+SystemC.I2C.start_detected
+SystemC.I2C.stop_detected
+SystemC.I2C.tip_ack
+@29
+SystemC.I2C.xmt_byte_done
+@200
+-Outputs
+@28
+SystemC.I2C.i2c_ack_done
+SystemC.I2C.tip_addr_byte
+SystemC.I2C.tip_read_byte
+SystemC.I2C.tip_write_byte
+SystemC.I2C.tip_wr_ack
+SystemC.I2C.tip_rd_ack
+SystemC.I2C.tip_addr_ack
+SystemC.I2C.i2c_error
+SystemC.I2C.state_out[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

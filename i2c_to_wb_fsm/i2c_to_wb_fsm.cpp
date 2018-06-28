@@ -331,7 +331,7 @@ void i2c_to_wb_fsm::tracing(sc_trace_file *tf)
     sc_trace(tf, this->i2c_data_fall, str+".i2c_data_fall");
     sc_trace(tf, this->i2c_clk, str+".i2c_clk");
     sc_trace(tf, this->i2c_clk_rise, str+".i2c_clk_rise");
-    sc_trace(tf, this->i2c_clk_fall, str+".next_state");
+    sc_trace(tf, this->i2c_clk_fall, str+".i2c_clk_fall");
     sc_trace(tf, this->i2c_r_w_bit, str+".i2c_r_w_bit");  
     sc_trace(tf, this->i2c_ack_out, str+".i2c_ack_out");
     sc_trace(tf, this->wb_clk_i, str+".wb_clk_i");
