@@ -1,0 +1,95 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Thu Jun 28 21:49:40 2018
+[*]
+[dumpfile] "/home/maestria/i2c_to_wb/i2c_to_wb_top.vcd"
+[dumpfile_mtime] "Thu Jun 28 21:49:15 2018"
+[dumpfile_size] 50303
+[savefile] "/home/maestria/i2c_to_wb/i2c_to_wb_top.gtkw"
+[timestart] 135
+[size] 958 1003
+[pos] -1 -1
+*-4.848461 28 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] SystemC.
+[treeopen] SystemC.i2c_to_wb_top.
+[sst_width] 225
+[signals_width] 239
+[sst_expanded] 1
+[sst_vpaned_height] 294
+@200
+-i2c Top Testbench
+@28
+SystemC.i2c_to_wb_top.i2c_clk_in
+SystemC.i2c_to_wb_top.i2c_clk_oe
+SystemC.i2c_to_wb_top.i2c_clk_out
+SystemC.i2c_to_wb_top.i2c_data_in
+SystemC.i2c_to_wb_top.i2c_data_oe
+SystemC.i2c_to_wb_top.i2c_data_out
+SystemC.i2c_to_wb_top.wb_ack_i
+@22
+SystemC.i2c_to_wb_top.wb_addr_o[7:0]
+@28
+SystemC.i2c_to_wb_top.wb_clk_i
+SystemC.i2c_to_wb_top.wb_cyc_o
+@22
+SystemC.i2c_to_wb_top.wb_data_i[31:0]
+SystemC.i2c_to_wb_top.wb_data_o[31:0]
+@28
+SystemC.i2c_to_wb_top.wb_err_i
+SystemC.i2c_to_wb_top.wb_rst_i
+SystemC.i2c_to_wb_top.wb_rty_i
+@22
+SystemC.i2c_to_wb_top.wb_sel_o[3:0]
+@28
+SystemC.i2c_to_wb_top.wb_stb_o
+SystemC.i2c_to_wb_top.wb_we_o
+@200
+-Internal Signals
+->> IF
+@22
+SystemC.i2c_to_wb_top.i_i2c_to_wb_if.i2c_offset_r[7:0]
+@28
+SystemC.i2c_to_wb_top.i_i2c_to_wb_if.i2c_r_w_bit
+@200
+->> Config
+@28
+SystemC.i2c_to_wb_top.topConfig.i2c_ack_out
+@22
+SystemC.i2c_to_wb_top.topConfig.i2c_byte_in[7:0]
+@28
+SystemC.i2c_to_wb_top.topConfig.tip_addr_ack
+SystemC.i2c_to_wb_top.topConfig.wb_clk_i
+SystemC.i2c_to_wb_top.topConfig.wb_rst_i
+@200
+->> FSM
+@22
+SystemC.i2c_to_wb_top.topFSM.bit_count[3:0]
+SystemC.i2c_to_wb_top.topFSM.next_state[31:0]
+@28
+SystemC.i2c_to_wb_top.topFSM.start_detected
+@22
+SystemC.i2c_to_wb_top.topFSM.state[31:0]
+@28
+SystemC.i2c_to_wb_top.topFSM.stop_detected
+SystemC.i2c_to_wb_top.topFSM.tip_ack
+SystemC.i2c_to_wb_top.topFSM.xmt_byte_done
+@200
+->> GF - Clock
+@28
+SystemC.i2c_to_wb_top.topClockGlitchFilter.clk
+SystemC.i2c_to_wb_top.topClockGlitchFilter.fall
+@29
+SystemC.i2c_to_wb_top.topClockGlitchFilter.in
+@28
+SystemC.i2c_to_wb_top.topClockGlitchFilter.out
+SystemC.i2c_to_wb_top.topClockGlitchFilter.rise
+@200
+->> GF - Data
+@28
+SystemC.i2c_to_wb_top.topDataGlitchFilter.clk
+SystemC.i2c_to_wb_top.topDataGlitchFilter.fall
+SystemC.i2c_to_wb_top.topDataGlitchFilter.in
+SystemC.i2c_to_wb_top.topDataGlitchFilter.out
+SystemC.i2c_to_wb_top.topDataGlitchFilter.rise
+[pattern_trace] 1
+[pattern_trace] 0
