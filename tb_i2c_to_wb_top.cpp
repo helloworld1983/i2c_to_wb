@@ -4,8 +4,9 @@
 int sc_main (int argc, char* argv[]) 
 { 
   // -------------------------------------------> Define Ports
-  sc_signal<bool>         i2c_data_in;
-  sc_clock i2c_clk_in("i2c_clk_in", 2, SC_NS, 0.5);
+  //sc_signal<bool>         i2c_data_in;
+  sc_clock i2c_data_in("i2c_data_in", 20, SC_NS, 0.5);
+  sc_clock i2c_clk_in("i2c_clk_in", 20, SC_NS, 0.5);
   sc_signal<bool>         i2c_data_out;
   sc_signal<bool>         i2c_clk_out;
   sc_signal<bool>         i2c_data_oe;
@@ -22,7 +23,8 @@ int sc_main (int argc, char* argv[])
   sc_signal<bool>         wb_err_i;
   sc_signal<bool>         wb_rty_i;
 
-  sc_signal<bool>         wb_clk_i;
+  sc_clock wb_clk_i("wb_clk_i", 2, SC_NS, 0.5);
+  //sc_signal<bool>         wb_clk_i;
   sc_signal<bool>         wb_rst_i;
 
   // -------------------------------------------> DUT Instance
@@ -74,10 +76,34 @@ int sc_main (int argc, char* argv[])
     sc_trace(tf, wb_clk_i,     "wb_clk_i");
     sc_trace(tf, wb_rst_i,     "wb_rst_i");
     
+    // Dump Internal module signals
+    i2c_to_wb_top_tb.tracing(tf);
 
-  cout << "@" << sc_time_stamp() <<" Terminating simulation\n" << endl;
-  
+  cout << "@" << sc_time_stamp() <<" Initiating simulation\n" << endl;
+
+  //sc_clock i2c_clk_in("i2c_clk_in", 2, SC_NS, 0.5);
+  //sc_clock wb_clk_i("wb_clk_i", 2, SC_NS, 0.5);
+
+  // Initial State;
+  //i2c_data_in = 0;                                    
+  wb_data_i = "00000000000000000000000000000001";                            
+  wb_ack_i = 0;                           
+  wb_err_i = 0;                     
+  wb_rty_i = 0;                                                
+  wb_rst_i = 1;                        
   sc_start(10,SC_NS);
+  
+  // Inputs Change;
+  //i2c_data_in = 1;   
+  wb_data_i = "00000000000000000000000000000001"; 
+  wb_ack_i = 0;                           
+  wb_err_i = 0;                     
+  wb_rty_i = 0;    
+  wb_rst_i = 0;                        
+  sc_start(10,SC_NS);
+
+  
+  sc_start(1000,SC_NS);
   
   cout << "@" << sc_time_stamp() <<" Terminating simulation\n" << endl;
   sc_close_vcd_trace_file(tf);

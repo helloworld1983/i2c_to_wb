@@ -7,12 +7,11 @@ void glitchFilter::tracing(sc_trace_file *tf)
     const std::string str = this->name();
     
     // Dump local signals
-    sc_trace(tf, this->in_reg, str+".in_reg");
-    sc_trace(tf, this->buffer, str+".buffer");
-    sc_trace(tf, this->all_hi_lsb, str+".all_hi_lsb");
-    sc_trace(tf, this->all_low_lsb, str+".all_low_lsb");
-    sc_trace(tf, this->out_en, str+".out_en");
-    sc_trace(tf, this->temp_bit, str+".temp_bit");
+    sc_trace(tf, this->clk, str+".clk");
+    sc_trace(tf, this->in, str+".in");
+    sc_trace(tf, this->out, str+".out");
+    sc_trace(tf, this->rise, str+".rise");
+    sc_trace(tf, this->fall, str+".fall");
 }
 
 /*
