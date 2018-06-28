@@ -14,3 +14,5 @@ i2c_to_wb_if.o
 i2c_to_wb_top.o
 tb_top.vcd
 wb_slave_model.o
+glitch_filter.o
+glitch_filter/glitch_filter.h.gch
